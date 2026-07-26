@@ -73,7 +73,7 @@ export const exportAuditLogs = async (req, res) => {
 
     if (format === "pdf") {
       const pdf = createSimplePdf({
-        title: "KAVACH Audit Export",
+        title: "Nexurity Audit Export",
         lines: logs.map(
           (log) =>
             `${log.createdAt || ""} | ${log.severity} | ${log.action} | ${log.userEmail || "System"} | ${log.resourceType}/${log.resourceId}`
@@ -83,7 +83,7 @@ export const exportAuditLogs = async (req, res) => {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
-        `attachment; filename="kavach-audit-${timestamp}.pdf"`
+        `attachment; filename="nexurity-audit-${timestamp}.pdf"`
       );
       return res.send(pdf);
     }
@@ -111,7 +111,7 @@ export const exportAuditLogs = async (req, res) => {
     );
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="kavach-audit-${timestamp}.csv"`
+      `attachment; filename="nexurity-audit-${timestamp}.csv"`
     );
     return res.send(csv);
   } catch (error) {

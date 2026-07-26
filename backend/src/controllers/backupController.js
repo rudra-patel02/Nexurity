@@ -22,7 +22,7 @@ export const exportBackup = async (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="kavach-backup-${Date.now()}.json"`
+      `attachment; filename="nexurity-backup-${Date.now()}.json"`
     );
     res.json({
       ...payload,

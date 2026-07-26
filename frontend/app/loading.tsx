@@ -14,7 +14,7 @@ export default function Loading() {
           aria-hidden="true"
         />
         <h1 className="mt-4 text-xl font-bold text-white">
-          Loading KAVACH
+          Loading Nexurity
         </h1>
         <p className="mt-2 text-sm text-slate-400">
           Preparing live plant intelligence and operational views.

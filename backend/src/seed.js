@@ -103,7 +103,7 @@ await Machine.insertMany([
   },
 ]);
 
-console.log("✅ KAVACH machine database seeded successfully.");
+console.log("✅ Nexurity machine database seeded successfully.");
 
 const adminResult = await ensureSeededAdminUser();
 

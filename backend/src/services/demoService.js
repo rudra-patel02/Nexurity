@@ -80,9 +80,9 @@ export const generateDemoData = async () => {
 
   const tenant = await Tenant.create({
     dataResidency: "India",
-    domain: "demo.kavach.local",
+    domain: "demo.nexurity.local",
     industry: "Industrial Manufacturing",
-    name: "KAVACH Demo Industries",
+    name: "Nexurity Demo Industries",
     settings: {
       demoMode: true,
       resettable: true,
@@ -100,7 +100,7 @@ export const generateDemoData = async () => {
     headquartersCountry: "India",
     headquartersRegion: "West",
     industry: "Industrial Manufacturing",
-    name: "KAVACH Demo Industries",
+    name: "Nexurity Demo Industries",
     onboarding: {
       completedAt: now(),
       status: "Completed",
@@ -137,12 +137,12 @@ export const generateDemoData = async () => {
       tenantId: DEMO_TENANT_ID,
     },
   ]);
-  const password = await bcrypt.hash("KavachDemo@2026", 10);
+  const password = await bcrypt.hash("NexurityDemo@2026", 10);
   const users = await User.insertMany([
     {
       activePlantId: plants[0].plantId,
       department: "Operations",
-      email: "demo.admin@kavach.local",
+      email: "demo.admin@nexurity.local",
       name: "Demo Admin",
       organizationId: String(organization._id),
       password,
@@ -154,7 +154,7 @@ export const generateDemoData = async () => {
     {
       activePlantId: plants[1].plantId,
       department: "Maintenance",
-      email: "demo.engineer@kavach.local",
+      email: "demo.engineer@nexurity.local",
       name: "Demo Engineer",
       organizationId: String(organization._id),
       password,
@@ -341,7 +341,7 @@ export const generateDemoData = async () => {
   const workOrders = await WorkOrder.insertMany(
     notifications.map((notification, index) => ({
       aiRecommendation: notification.suggestedAction,
-      createdBy: "KAVACH Demo Mode",
+      createdBy: "Nexurity Demo Mode",
       department: machines.find((machine) => machine.machineId === notification.machineId)?.department,
       description: notification.message,
       estimatedDowntimeHours: notification.estimatedDowntimeHours,
@@ -414,9 +414,9 @@ export const generateDemoData = async () => {
 
   return {
     credentials: {
-      adminEmail: "demo.admin@kavach.local",
-      engineerEmail: "demo.engineer@kavach.local",
-      password: "KavachDemo@2026",
+      adminEmail: "demo.admin@nexurity.local",
+      engineerEmail: "demo.engineer@nexurity.local",
+      password: "NexurityDemo@2026",
     },
     counts: {
       fleetAnalytics: 1,

@@ -1,6 +1,6 @@
-# KAVACH
+# Nexurity
 
-KAVACH is an industrial operations and decision-intelligence platform for live machine monitoring, predictive maintenance, AI-assisted plant operations, enterprise administration, IoT telemetry, Smart Factory digital twin views, reports, audit trails, and Socket.IO realtime updates.
+Nexurity is an industrial operations and decision-intelligence platform for live machine monitoring, predictive maintenance, AI-assisted plant operations, enterprise administration, IoT telemetry, Smart Factory digital twin views, reports, audit trails, and Socket.IO realtime updates.
 
 The current implementation is a split application:
 
@@ -15,13 +15,13 @@ The current implementation is a split application:
 
 | Service | URL |
 | --- | --- |
-| Healthy frontend | `https://kavach-frontend-4s8e.onrender.com` |
-| Primary frontend alias | `https://kavach-frontend.onrender.com` |
-| Backend API | `https://kavach-spgh.onrender.com` |
-| Health check | `https://kavach-spgh.onrender.com/api/health` |
-| Socket.IO | `https://kavach-spgh.onrender.com/socket.io` |
+| Healthy frontend | `https://nexurity-frontend.onrender.com` |
+| Primary frontend alias | `https://nexurity-frontend.onrender.com` |
+| Backend API | `https://nexurity-backend.onrender.com` |
+| Health check | `https://nexurity-backend.onrender.com/api/health` |
+| Socket.IO | `https://nexurity-backend.onrender.com/socket.io` |
 
-Recent QA found the backend and `kavach-frontend-4s8e` deployment healthy. The primary frontend alias returned `503` during live checks and should be reviewed in Render before it is treated as the production entry point.
+Recent QA found the backend and `nexurity-frontend-4s8e` deployment healthy. The primary frontend alias returned `503` during live checks and should be reviewed in Render before it is treated as the production entry point.
 
 ## Product Modules
 
@@ -56,7 +56,7 @@ Recent QA found the backend and `kavach-frontend-4s8e` deployment healthy. The p
 
 ## Runtime Architecture
 
-![KAVACH production architecture](docs/architecture.svg)
+![Nexurity production architecture](docs/architecture.svg)
 
 ```text
 Browser / PWA
@@ -112,8 +112,8 @@ Frontend:
 
 ```env
 NEXT_PUBLIC_API_URL=
-NEXT_PUBLIC_SOCKET_URL=https://kavach-spgh.onrender.com
-API_URL=https://kavach-spgh.onrender.com
+NEXT_PUBLIC_SOCKET_URL=https://nexurity-backend.onrender.com
+API_URL=https://nexurity-backend.onrender.com
 NEXT_PUBLIC_VAPID_PUBLIC_KEY=
 ```
 
@@ -125,9 +125,9 @@ PORT=5000
 MONGO_URI=mongodb+srv://<user>:<password>@<cluster>/<database>
 JWT_SECRET=<strong-secret>
 JWT_REFRESH_SECRET=<strong-refresh-secret>
-CORS_ORIGIN=https://kavach-frontend-4s8e.onrender.com
+CORS_ORIGIN=https://nexurity-frontend.onrender.com
 CORS_CREDENTIALS=true
-PUBLIC_API_BASE_URL=https://kavach-spgh.onrender.com
+PUBLIC_API_BASE_URL=https://nexurity-backend.onrender.com
 DEVICE_SECRET=<device-secret>
 IOT_ENABLED=false
 ENABLE_SENSOR_SIMULATION=false
@@ -157,7 +157,7 @@ npm run verify:production
 Authentication uses bcrypt password hashing, JWT access tokens, refresh tokens, secure auth middleware, RBAC role checks, and audit logging. Source-level seeded admin defaults are:
 
 ```text
-Email: admin@kavach.com
+Email: admin@nexurity.com
 Password: admin123
 ```
 

@@ -79,7 +79,7 @@ const logStartup = (message, metadata = {}) => {
     JSON.stringify({
       level: "info",
       message,
-      service: "kavach-backend",
+      service: "nexurity-backend",
       timestamp: new Date().toISOString(),
       ...metadata,
     })
@@ -91,7 +91,7 @@ const logStartupError = (message, error, metadata = {}) => {
     JSON.stringify({
       level: "error",
       message,
-      service: "kavach-backend",
+      service: "nexurity-backend",
       timestamp: new Date().toISOString(),
       error: error?.message || String(error),
       stack: error?.stack,
@@ -206,7 +206,7 @@ const start = async () => {
   app.get("/", (req, res) => {
     res.json({
       success: true,
-      message: "Kavach Backend Running",
+      message: "Nexurity Backend Running",
     });
   });
 

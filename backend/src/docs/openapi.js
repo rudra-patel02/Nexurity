@@ -1,7 +1,7 @@
 export const openApiDocument = {
   openapi: "3.0.3",
   info: {
-    title: "KAVACH Enterprise API",
+    title: "Nexurity Enterprise API",
     version: "18.0.0",
     description:
       "Industrial Decision Intelligence APIs for auth, telemetry, plants, work orders, notifications, RBAC, reports, audit, and monitoring.",

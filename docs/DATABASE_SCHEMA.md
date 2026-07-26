@@ -1,6 +1,6 @@
 # Database Schema
 
-KAVACH uses MongoDB with Mongoose models in `backend/src/models`. There is no relational migration system. Schema evolution is handled by additive Mongoose fields, defaults, indexes, and service-level compatibility logic.
+Nexurity uses MongoDB with Mongoose models in `backend/src/models`. There is no relational migration system. Schema evolution is handled by additive Mongoose fields, defaults, indexes, and service-level compatibility logic.
 
 ## Core Collections
 

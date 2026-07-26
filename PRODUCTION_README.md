@@ -1,6 +1,6 @@
-# KAVACH Enterprise SaaS
+# Nexurity Enterprise SaaS
 
-KAVACH is deployable as an enterprise Industrial Decision Intelligence platform with:
+Nexurity is deployable as an enterprise Industrial Decision Intelligence platform with:
 
 - RBAC and plant-scoped access
 - Multi-plant tenant hierarchy

@@ -29,7 +29,7 @@ export default function GlobalError({
               </div>
             </div>
             <p className="mt-3 text-sm leading-6 text-red-100/80">
-              KAVACH could not render this view. Retry the page once the
+              Nexurity could not render this view. Retry the page once the
               service is available again.
             </p>
             <button

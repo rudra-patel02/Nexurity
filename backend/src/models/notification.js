@@ -9,7 +9,7 @@ const alertTimelineSchema = new mongoose.Schema(
     },
     actor: {
       type: String,
-      default: "KAVACH Alert Engine",
+      default: "Nexurity Alert Engine",
     },
     message: String,
   },

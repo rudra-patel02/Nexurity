@@ -85,7 +85,7 @@ const buildHealthPayload = (req, startedAt) => {
     },
     nodeVersion: process.version,
     responseTimeMs: Number(responseTimeMs.toFixed(2)),
-    service: "kavach-backend",
+    service: "nexurity-backend",
     socket: {
       connections: io?.engine?.clientsCount || 0,
     },

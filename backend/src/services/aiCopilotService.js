@@ -339,7 +339,7 @@ const buildMostCriticalMachineResponse = (machines, context = {}) => {
       `Business Impact: ${leader.businessImpact}`,
       `Recommended Action: ${leader.recommendation}`,
       "",
-      "This answer uses only live machine telemetry, current health/status, alerts, work orders, and predictive calculations from the KAVACH database.",
+      "This answer uses only live machine telemetry, current health/status, alerts, work orders, and predictive calculations from the Nexurity database.",
     ].join("\n"),
     recommendation: formatRecommendation(leader),
     summary: buildPlantSummary(machines),
@@ -592,7 +592,7 @@ export const buildAiProviderPayload = (message, contextOrMachines) => {
       {
         role: "system",
         content:
-          "You are KAVACH, an industrial maintenance copilot. Use only supplied machine telemetry and format responses for plant operations teams.",
+          "You are Nexurity, an industrial maintenance copilot. Use only supplied machine telemetry and format responses for plant operations teams.",
       },
       {
         role: "user",

@@ -140,14 +140,14 @@ const sendWorkOrderExport = (res, format, workOrders) => {
         `${workOrder.workOrderId} | ${workOrder.machineName} | ${workOrder.priority} | ${workOrder.status} | ${workOrder.assignedEngineer || "Unassigned"}`
     );
     const pdf = createSimplePdf({
-      title: "KAVACH Work Order Export",
+      title: "Nexurity Work Order Export",
       lines,
     });
 
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="kavach-work-orders-${timestamp}.pdf"`
+      `attachment; filename="nexurity-work-orders-${timestamp}.pdf"`
     );
     return res.send(pdf);
   }
@@ -161,7 +161,7 @@ const sendWorkOrderExport = (res, format, workOrders) => {
   );
   res.setHeader(
     "Content-Disposition",
-    `attachment; filename="kavach-work-orders-${timestamp}.csv"`
+    `attachment; filename="nexurity-work-orders-${timestamp}.csv"`
   );
   return res.send(csv);
 };
@@ -556,7 +556,7 @@ export const printWorkOrder = async (req, res) => {
   </style>
 </head>
 <body>
-  <h1>KAVACH Work Order ${escapeHtml(serializedWorkOrder.workOrderId)}</h1>
+  <h1>Nexurity Work Order ${escapeHtml(serializedWorkOrder.workOrderId)}</h1>
   <p>${escapeHtml(serializedWorkOrder.machineName)} (${escapeHtml(serializedWorkOrder.machineId)})</p>
   <p><span class="badge">${escapeHtml(serializedWorkOrder.priority)}</span> <span class="badge">${escapeHtml(serializedWorkOrder.status)}</span></p>
   <table>

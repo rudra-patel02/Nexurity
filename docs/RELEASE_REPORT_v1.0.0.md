@@ -1,18 +1,18 @@
-# KAVACH v1.0.0 Release Report
+# Nexurity v1.0.0 Release Report
 
 Release date: 2026-07-24
 
 ## Release Summary
 
-KAVACH v1.0.0 is prepared as the first production release of the current industrial operations platform. The release includes the Next.js frontend, Express/MongoDB backend, Socket.IO realtime transport, AI and predictive maintenance modules, IoT telemetry paths, Smart Factory views, reports, audit trails, enterprise operations, and production documentation.
+Nexurity v1.0.0 is prepared as the first production release of the current industrial operations platform. The release includes the Next.js frontend, Express/MongoDB backend, Socket.IO realtime transport, AI and predictive maintenance modules, IoT telemetry paths, Smart Factory views, reports, audit trails, enterprise operations, and production documentation.
 
 ## Production Targets
 
 | Service | Status |
 | --- | --- |
-| Backend `https://kavach-spgh.onrender.com` | Live QA passed |
-| Frontend `https://kavach-frontend-4s8e.onrender.com` | Live route QA passed |
-| Frontend alias `https://kavach-frontend.onrender.com` | Returned `503` during QA; review before using as production entry |
+| Backend `https://nexurity-backend.onrender.com` | Live QA passed |
+| Frontend `https://nexurity-frontend.onrender.com` | Live route QA passed |
+| Frontend alias `https://nexurity-frontend.onrender.com` | Returned `503` during QA; review before using as production entry |
 
 ## Release Artifacts
 
@@ -37,7 +37,7 @@ Required local gates:
 Live QA completed before release preparation:
 
 - Backend health, auth invalid inputs, protected routes, authenticated modules, exports, reports, Copilot, CORS preflight, and Socket.IO polling passed.
-- Healthy frontend route smoke passed on `kavach-frontend-4s8e`.
+- Healthy frontend route smoke passed on `nexurity-frontend-4s8e`.
 
 ## Production Readiness Notes
 

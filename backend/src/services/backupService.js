@@ -72,7 +72,7 @@ export const buildBackupPayload = async ({ includeSecrets = false } = {}) => {
   return {
     data,
     exportedAt: new Date().toISOString(),
-    service: "KAVACH",
+    service: "Nexurity",
     version: process.env.API_VERSION || "1.0.0",
   };
 };

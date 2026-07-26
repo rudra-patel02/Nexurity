@@ -862,8 +862,8 @@ export const buildCopilotReport = (machines) => {
     }));
 
   return {
-    reportId: `KAVACH-${Date.now()}`,
-    title: "KAVACH AI Maintenance Copilot Report",
+    reportId: `Nexurity-${Date.now()}`,
+    title: "Nexurity AI Maintenance Copilot Report",
     generatedAt: new Date().toISOString(),
     plantSummary: summary,
     riskDistribution,

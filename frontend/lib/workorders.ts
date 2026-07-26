@@ -125,7 +125,7 @@ const downloadBlob = async (url: string, filename: string) => {
 export const downloadWorkOrderExport = (format: "csv" | "excel" | "pdf") =>
   downloadBlob(
     getWorkOrderExportUrl(format),
-    `kavach-work-orders-${Date.now()}.${format === "pdf" ? "pdf" : "csv"}`
+    `nexurity-work-orders-${Date.now()}.${format === "pdf" ? "pdf" : "csv"}`
   );
 
 export const printWorkOrder = async (id: string) => {

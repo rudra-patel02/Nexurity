@@ -105,7 +105,7 @@ export default function CopilotPage() {
       id: "welcome",
       role: "assistant",
       content:
-        "Hello. I am the KAVACH AI Maintenance Copilot. Ask me about overheating, unhealthy machines, failure prediction, vibration anomalies, maintenance plans, or plant status.",
+        "Hello. I am the Nexurity AI Maintenance Copilot. Ask me about overheating, unhealthy machines, failure prediction, vibration anomalies, maintenance plans, or plant status.",
       createdAt: "",
     },
   ]);

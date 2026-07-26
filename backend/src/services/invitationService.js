@@ -78,7 +78,7 @@ export const createUserInvitation = async ({ payload = {}, req } = {}) => {
   const invitation = await UserInvitation.create({
     email,
     expiresAt,
-    invitedBy: req?.user?.email || req?.user?.name || "KAVACH Admin",
+    invitedBy: req?.user?.email || req?.user?.name || "Nexurity Admin",
     metadata: payload.metadata || {},
     name: String(payload.name || "").trim(),
     organizationId:

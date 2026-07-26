@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 
 import User from "../models/user.js";
 
-export const ADMIN_EMAIL = "admin@kavach.com";
+export const ADMIN_EMAIL = "admin@nexurity.com";
 export const ADMIN_PASSWORD = "admin123";
 
 export const isBcryptHash = (value) =>
@@ -25,7 +25,7 @@ export const ensureSeededAdminUser = async ({
     activePlantId: existingUser?.activePlantId || "",
     department: existingUser?.department || "Administration",
     email: normalizedEmail,
-    name: existingUser?.name || "KAVACH Admin",
+    name: existingUser?.name || "Nexurity Admin",
     organizationId: existingUser?.organizationId || "",
     password: hashedPassword,
     permissions: existingUser?.permissions || [],

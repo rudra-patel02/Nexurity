@@ -1,3 +1,5 @@
+name: nexurity
+
 services:
   mongo:
     image: mongo:7
@@ -5,7 +7,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - kavach-mongo:/data/db
+      - nexurity-mongo:/data/db
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
       interval: 10s
@@ -31,12 +33,12 @@ services:
       SENSOR_INTERVAL_MS: 1500
       IOT_ENABLED: "true"
       MQTT_BROKER_URL: mqtt://mqtt:1883
-      MQTT_CLIENT_ID: kavach-backend
+      MQTT_CLIENT_ID: nexurity-backend
       MQTT_KEEPALIVE: "60"
       DEVICE_SECRET: ${DEVICE_SECRET:?DEVICE_SECRET is required for production IoT ingestion}
       ENERGY_COST_PER_KWH: "0.12"
       CARBON_KG_PER_KWH: "0.42"
-      COMPANY_NAME: KAVACH Industrial Operations
+      COMPANY_NAME: Nexurity Industrial Operations
       COMPANY_SITE: Primary Plant
     ports:
       - "5000:5000"
@@ -88,7 +90,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/kavach.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/nexurity.conf:/etc/nginx/conf.d/default.conf:ro
 
 volumes:
-  kavach-mongo:
+  nexurity-mongo:

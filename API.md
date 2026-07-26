@@ -1,17 +1,17 @@
-# KAVACH API Reference
+# Nexurity API Reference
 
 This document summarizes the production REST and Socket.IO contract. The backend also serves Swagger UI at `/api/docs` and OpenAPI JSON at `/api/docs/openapi.json`.
 
 Current backend API base URL:
 
 ```text
-https://kavach-spgh.onrender.com
+https://nexurity-backend.onrender.com
 ```
 
 All REST paths below are relative to:
 
 ```text
-https://kavach-spgh.onrender.com/api
+https://nexurity-backend.onrender.com/api
 ```
 
 ## Authentication
@@ -29,7 +29,7 @@ POST /api/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@kavach.com",
+  "email": "admin@nexurity.com",
   "password": "admin123"
 }
 ```
@@ -391,7 +391,7 @@ The following enterprise features are implemented through existing data and APIs
 Current Socket.IO base:
 
 ```text
-https://kavach-spgh.onrender.com/socket.io
+https://nexurity-backend.onrender.com/socket.io
 ```
 
 Client configuration:
@@ -456,9 +456,9 @@ Server-to-client events:
 Use these checks after deployment:
 
 ```text
-GET https://kavach-spgh.onrender.com/api/health
-GET https://kavach-spgh.onrender.com/api/docs/openapi.json
-POST https://kavach-spgh.onrender.com/api/auth/login
+GET https://nexurity-backend.onrender.com/api/health
+GET https://nexurity-backend.onrender.com/api/docs/openapi.json
+POST https://nexurity-backend.onrender.com/api/auth/login
 ```
 
 Then verify in the browser:

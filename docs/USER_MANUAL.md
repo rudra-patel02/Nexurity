@@ -1,12 +1,12 @@
 # User Manual
 
-This guide describes how operators, engineers, managers, and administrators use KAVACH.
+This guide describes how operators, engineers, managers, and administrators use Nexurity.
 
 ## Login
 
 1. Open the frontend URL.
 2. Enter email and password.
-3. KAVACH redirects authenticated users to the dashboard.
+3. Nexurity redirects authenticated users to the dashboard.
 
 If login fails, verify credentials and wait if rate limiting was triggered by repeated failures.
 
@@ -22,7 +22,7 @@ Use it to:
 - Open AI Copilot.
 - Monitor production analytics, alerts, and digital twin preview.
 
-The Autonomous AI Control Center shows AI-recommended actions with Approve and Reject controls. These controls record review intent in the UI only; KAVACH does not execute machine actions automatically.
+The Autonomous AI Control Center shows AI-recommended actions with Approve and Reject controls. These controls record review intent in the UI only; Nexurity does not execute machine actions automatically.
 
 ## Executive Dashboard
 

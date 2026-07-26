@@ -1,6 +1,6 @@
-# KAVACH Installation Guide
+# Nexurity Installation Guide
 
-This guide sets up KAVACH for local development and production-like verification.
+This guide sets up Nexurity for local development and production-like verification.
 
 ## Requirements
 
@@ -23,7 +23,7 @@ git --version
 
 ```bash
 git clone <repository-url>
-cd KAVACH_Backup
+cd Nexurity_Backup
 npm --prefix backend install
 npm --prefix frontend install
 ```
@@ -80,8 +80,8 @@ For production builds, use HTTPS URLs:
 
 ```env
 NEXT_PUBLIC_API_URL=
-NEXT_PUBLIC_SOCKET_URL=https://kavach-spgh.onrender.com
-API_URL=https://kavach-spgh.onrender.com
+NEXT_PUBLIC_SOCKET_URL=https://nexurity-backend.onrender.com
+API_URL=https://nexurity-backend.onrender.com
 ```
 
 ## Database Setup
@@ -97,7 +97,7 @@ Use MongoDB Atlas for the closest production match.
 Example shape:
 
 ```env
-MONGO_URI=mongodb+srv://kavach_user:<password>@cluster.example.mongodb.net/kavach
+MONGO_URI=mongodb+srv://nexurity_user:<password>@cluster.example.mongodb.net/kavach
 ```
 
 Do not commit real connection strings.
@@ -127,7 +127,7 @@ npm --prefix backend run seed:admin
 Expected seeded admin:
 
 ```text
-Email: admin@kavach.com
+Email: admin@nexurity.com
 Password: admin123
 ```
 
@@ -232,7 +232,7 @@ CORS_ORIGIN=http://localhost:3000
 For production:
 
 ```env
-CORS_ORIGIN=https://kavach-1-7749.onrender.com
+CORS_ORIGIN=https://nexurity-frontend.onrender.com
 ```
 
 ### Mixed content errors
@@ -241,8 +241,8 @@ Production frontend variables must use HTTPS:
 
 ```env
 NEXT_PUBLIC_API_URL=
-NEXT_PUBLIC_SOCKET_URL=https://kavach-spgh.onrender.com
-API_URL=https://kavach-spgh.onrender.com
+NEXT_PUBLIC_SOCKET_URL=https://nexurity-backend.onrender.com
+API_URL=https://nexurity-backend.onrender.com
 ```
 
 ### Socket.IO does not connect

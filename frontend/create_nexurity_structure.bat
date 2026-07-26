@@ -34,7 +34,7 @@ mkdir backend\app\services
 mkdir backend\app\routes
 
 @echo off
-echo Creating Kavach folder structure...
+echo Creating Nexurity folder structure...
 
 mkdir components
 mkdir components\layout
@@ -59,6 +59,6 @@ type nul > styles\navbar.css
 
 echo.
 echo ==============================
-echo Kavach folders created!
+echo Nexurity folders created!
 echo ==============================
 pause

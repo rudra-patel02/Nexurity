@@ -11,7 +11,7 @@ const logJson = (level, message, fields = {}) => {
   const payload = {
     level,
     message,
-    service: "kavach-backend",
+    service: "nexurity-backend",
     timestamp: new Date().toISOString(),
     ...fields,
   };

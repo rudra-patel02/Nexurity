@@ -2,7 +2,7 @@
 
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import { applyKavachTheme, type ThemeMode } from "./ThemePersistence";
+import { applyNexurityTheme, type ThemeMode } from "./ThemePersistence";
 
 const options: Array<{ icon: typeof Monitor; label: string; value: ThemeMode }> = [
   { icon: Monitor, label: "Auto", value: "auto" },
@@ -41,7 +41,7 @@ export default function ThemeModeControl({ compact = false }: { compact?: boolea
 
   const updateMode = (nextMode: ThemeMode) => {
     setMode(nextMode);
-    applyKavachTheme(nextMode);
+    applyNexurityTheme(nextMode);
   };
 
   return (

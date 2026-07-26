@@ -18,7 +18,7 @@ const logIoTInfo = (message, metadata = {}) => {
     JSON.stringify({
       level: "info",
       message,
-      service: "kavach-backend",
+      service: "nexurity-backend",
       timestamp: new Date().toISOString(),
       ...metadata,
     })

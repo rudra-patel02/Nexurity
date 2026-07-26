@@ -45,7 +45,7 @@ export const downloadReport = async (
   const disposition = response.headers.get("content-disposition") || "";
   const filename =
     disposition.match(/filename="([^"]+)"/)?.[1] ||
-    `kavach-${type}-report.${format === "excel" ? "xls" : format}`;
+    `nexurity-${type}-report.${format === "excel" ? "xls" : format}`;
 
   link.href = url;
   link.download = filename;

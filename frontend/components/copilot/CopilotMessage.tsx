@@ -61,7 +61,7 @@ export default function CopilotMessage({
             }`}
           >
             {isUser ? <User size={15} /> : <Bot size={15} />}
-            {isUser ? "Engineer" : "KAVACH Copilot"}
+            {isUser ? "Engineer" : "Nexurity Copilot"}
           </div>
 
           <div className="flex items-center gap-1 text-xs text-slate-400">

@@ -299,14 +299,14 @@ export const buildVisionAlertPayload = (event) => {
     type: "safety_warning",
     alertTimeline: [
       {
-        actor: "KAVACH AI Vision",
+        actor: "Nexurity AI Vision",
         event: "AI_VISION_EVENT_DETECTED",
         message: `${event.eventType} event ${event.eventId} detected on camera ${event.cameraId}.`,
       },
     ],
     alertHistory: [
       {
-        actor: "KAVACH AI Vision",
+        actor: "Nexurity AI Vision",
         event: "AI_VISION_EVENT_DETECTED",
         message: `${event.eventType} event ${event.eventId} detected on camera ${event.cameraId}.`,
       },
@@ -367,7 +367,7 @@ export const buildWhatIfSimulation = (machine, scenario = {}) => {
       eventType: String(scenario.eventType || scenario.type || "custom"),
       overrides,
       assumptions: [
-        "Simulation uses the current Kavach deterministic risk model.",
+        "Simulation uses the current Nexurity deterministic risk model.",
         "No machine state is persisted by this endpoint.",
         "Financial impact uses the configured downtime cost per hour.",
       ],

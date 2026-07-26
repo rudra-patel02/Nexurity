@@ -337,7 +337,7 @@ export const updateVisionEventStatus = async (req, res) => {
       {
         status,
         "metadata.statusUpdatedAt": new Date().toISOString(),
-        "metadata.statusUpdatedBy": req.user?.email || req.user?.name || "KAVACH",
+        "metadata.statusUpdatedBy": req.user?.email || req.user?.name || "Nexurity",
       },
       { new: true, runValidators: true }
     );

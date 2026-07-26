@@ -178,7 +178,7 @@ export const exportAnalyticsCsv = async (req, res) => {
     res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="kavach-analytics-${Date.now()}.csv"`
+      `attachment; filename="nexurity-analytics-${Date.now()}.csv"`
     );
     res.send(csv);
   } catch (error) {

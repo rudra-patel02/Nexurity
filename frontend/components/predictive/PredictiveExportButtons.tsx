@@ -62,7 +62,7 @@ export default function PredictiveExportButtons({
       .map((row) => row.map(escapeCsv).join(","))
       .join("\n");
 
-    downloadFile("kavach-predictive-maintenance.csv", csv, "text/csv");
+    downloadFile("nexurity-predictive-maintenance.csv", csv, "text/csv");
   };
 
   return (

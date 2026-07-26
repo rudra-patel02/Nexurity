@@ -15,7 +15,7 @@ export default function NotFound() {
           Page Not Found
         </h1>
         <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-slate-400">
-          The requested KAVACH view does not exist or may have moved. Return to
+          The requested Nexurity view does not exist or may have moved. Return to
           the command dashboard to continue monitoring plant operations.
         </p>
         <Link

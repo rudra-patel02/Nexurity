@@ -102,7 +102,7 @@ export const globalErrorHandler = (error, req, res, next) => {
     JSON.stringify({
       level: statusCode >= 500 ? "error" : "warn",
       message: "request_error",
-      service: "kavach-backend",
+      service: "nexurity-backend",
       timestamp: new Date().toISOString(),
       ...logPayload,
     })

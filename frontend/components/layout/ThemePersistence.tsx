@@ -25,7 +25,7 @@ const getStoredMode = (): ThemeMode => {
   return legacyTheme === "light" || legacyTheme === "dark" ? legacyTheme : "auto";
 };
 
-export const applyKavachTheme = (mode: ThemeMode) => {
+export const applyNexurityTheme = (mode: ThemeMode) => {
   const resolvedTheme = mode === "auto" ? getAutoTheme() : mode;
   const currentMode = document.documentElement.dataset.themeMode;
   const currentTheme = document.documentElement.dataset.theme;
@@ -48,13 +48,13 @@ export const applyKavachTheme = (mode: ThemeMode) => {
 
 export default function ThemePersistence() {
   useEffect(() => {
-    applyKavachTheme(getStoredMode());
+    applyNexurityTheme(getStoredMode());
 
     const timer = window.setInterval(() => {
       const mode = getStoredMode();
 
       if (mode === "auto") {
-        applyKavachTheme(mode);
+        applyNexurityTheme(mode);
       }
     }, 60_000);
 

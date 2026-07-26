@@ -4,7 +4,7 @@ import ThemePersistence from "@/components/layout/ThemePersistence";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "KAVACH Industrial Dashboard",
+  title: "Nexurity Industrial Dashboard",
   description: "Real-time industrial monitoring and decision intelligence",
   manifest: "/manifest.webmanifest",
 };

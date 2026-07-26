@@ -1,6 +1,6 @@
-# KAVACH Architecture
+# Nexurity Architecture
 
-KAVACH uses the existing split architecture: a Next.js frontend, an Express backend, MongoDB persistence, Socket.IO realtime transport, and optional industrial edge integrations. Recent enterprise features were added inside the same frontend routes and backend services; no new architectural tier was introduced.
+Nexurity uses the existing split architecture: a Next.js frontend, an Express backend, MongoDB persistence, Socket.IO realtime transport, and optional industrial edge integrations. Recent enterprise features were added inside the same frontend routes and backend services; no new architectural tier was introduced.
 
 ## System Context
 

@@ -1,6 +1,6 @@
-# KAVACH Production Deployment
+# Nexurity Production Deployment
 
-This guide prepares KAVACH for a production split deployment:
+This guide prepares Nexurity for a production split deployment:
 
 - Frontend: Render or Vercel, root directory `frontend`
 - Backend: Render or Railway, root directory `backend`
@@ -56,8 +56,8 @@ For the current Render-hosted backend, use:
 
 ```env
 NEXT_PUBLIC_API_URL=
-NEXT_PUBLIC_SOCKET_URL=https://kavach-spgh.onrender.com
-API_URL=https://kavach-spgh.onrender.com
+NEXT_PUBLIC_SOCKET_URL=https://nexurity-backend.onrender.com
+API_URL=https://nexurity-backend.onrender.com
 ```
 
 For Railway backend, use the Railway public HTTPS backend URL instead.
@@ -104,8 +104,8 @@ VAPID_SUBJECT=mailto:ops@example.com
 For the currently healthy frontend deployment, set:
 
 ```env
-CORS_ORIGIN=https://kavach-frontend-4s8e.onrender.com
-PUBLIC_API_BASE_URL=https://kavach-spgh.onrender.com
+CORS_ORIGIN=https://nexurity-frontend.onrender.com
+PUBLIC_API_BASE_URL=https://nexurity-backend.onrender.com
 ```
 
 Recommended production variables are listed in `.env.example` and `backend/.env.example`.
@@ -265,8 +265,8 @@ After deployment:
 The latest QA pass verified:
 
 - Backend health, auth invalid inputs, protected routes, authenticated API modules, exports, reports, Copilot, CORS preflight, and Socket.IO polling.
-- Healthy frontend route smoke on `https://kavach-frontend-4s8e.onrender.com`.
-- Primary frontend alias `https://kavach-frontend.onrender.com` returned `503`; review that Render service before using it as the production URL.
+- Healthy frontend route smoke on `https://nexurity-frontend.onrender.com`.
+- Primary frontend alias `https://nexurity-frontend.onrender.com` returned `503`; review that Render service before using it as the production URL.
 - Local backend startup requires MongoDB Atlas network access. If the current workstation IP is not allowlisted, the backend refuses to bind HTTP.
 
 ## Rollback

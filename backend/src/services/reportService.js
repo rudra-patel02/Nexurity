@@ -83,10 +83,10 @@ const buildReportLines = ({ type, machines, notifications, workOrders }) => {
   );
 
   return [
-    "KAVACH Industrial Decision Intelligence Platform",
+    "Nexurity Industrial Decision Intelligence Platform",
     title,
     `Generated At: ${new Date().toISOString()}`,
-    `Company: ${process.env.COMPANY_NAME || "KAVACH Industrial Operations"}`,
+    `Company: ${process.env.COMPANY_NAME || "Nexurity Industrial Operations"}`,
     "",
     "AI Summary",
     `Plant health is ${predictiveOverview.summary.machineHealth}% with ${predictiveOverview.summary.highRiskMachines} high-risk machines. OEE is ${executiveDashboard.kpis.oee}%, downtime is ${executiveDashboard.kpis.downtime} hours, and total energy is ${executiveDashboard.kpis.totalEnergy} kWh.`,
@@ -274,7 +274,7 @@ export const buildReport = ({ type, machines, notifications, workOrders }) => {
   });
 
   return {
-    reportId: `KAVACH-${normalizedType.toUpperCase()}-${Date.now()}`,
+    reportId: `Nexurity-${normalizedType.toUpperCase()}-${Date.now()}`,
     type: normalizedType,
     title: REPORT_TYPES[normalizedType],
     generatedAt: new Date().toISOString(),

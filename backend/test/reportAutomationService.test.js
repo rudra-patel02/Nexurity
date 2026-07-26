@@ -21,12 +21,12 @@ test("builds compact report delivery summaries for audit logs", () => {
     report: {
       generatedAt: "2026-07-23T00:00:00.000Z",
       lines: ["one", "two", "three"],
-      reportId: "KAVACH-AUTOMATED-1",
+      reportId: "Nexurity-AUTOMATED-1",
     },
     workOrders: [{ id: "WO-1" }],
   });
 
-  assert.equal(summary.reportId, "KAVACH-AUTOMATED-1");
+  assert.equal(summary.reportId, "Nexurity-AUTOMATED-1");
   assert.equal(summary.lineCount, 3);
   assert.equal(summary.machines, 1);
   assert.equal(summary.notifications, 2);

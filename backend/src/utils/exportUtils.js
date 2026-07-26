@@ -66,7 +66,7 @@ const wrapLine = (line, maxLength = 96) => {
   return lines.length > 0 ? lines : [""];
 };
 
-export const createSimplePdf = ({ lines = [], title = "KAVACH Export" }) => {
+export const createSimplePdf = ({ lines = [], title = "Nexurity Export" }) => {
   const visibleLines = [
     title,
     `Generated at ${new Date().toISOString()}`,

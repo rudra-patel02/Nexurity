@@ -2,7 +2,7 @@
 
 ## Stabilization decision
 
-KAVACH uses MongoDB through Mongoose as its single backend database
+Nexurity uses MongoDB through Mongoose as its single backend database
 architecture.
 
 This decision preserves the active implementation:

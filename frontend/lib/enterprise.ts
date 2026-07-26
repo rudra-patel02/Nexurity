@@ -50,7 +50,7 @@ export const downloadAuditExport = async (format: "csv" | "excel" | "pdf") => {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `kavach-audit-${Date.now()}.${
+  link.download = `nexurity-audit-${Date.now()}.${
     format === "pdf" ? "pdf" : "csv"
   }`;
   document.body.appendChild(link);
@@ -76,7 +76,7 @@ export const downloadBackup = async () => {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `kavach-backup-${Date.now()}.json`;
+  link.download = `nexurity-backup-${Date.now()}.json`;
   document.body.appendChild(link);
   link.click();
   link.remove();

@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: kavach-backend
+    name: nexurity-backend
     runtime: node
     rootDir: backend
     plan: starter

@@ -1,4 +1,4 @@
-const CACHE_NAME = "kavach-v4-shell";
+const CACHE_NAME = "nexurity-v4-shell";
 const SHELL_URLS = ["/", "/dashboard/executive", "/machines", "/iot", "/smart-factory"];
 
 self.addEventListener("install", (event) => {
@@ -37,16 +37,16 @@ self.addEventListener("fetch", (event) => {
 
 self.addEventListener("push", (event) => {
   const payload = event.data?.json?.() || {
-    title: "KAVACH Alert",
+    title: "Nexurity Alert",
     body: "A machine requires attention.",
   };
 
   event.waitUntil(
-    self.registration.showNotification(payload.title || "KAVACH Alert", {
+    self.registration.showNotification(payload.title || "Nexurity Alert", {
       body: payload.body || "A machine requires attention.",
       data: payload.data || {},
       icon: "/favicon.ico",
-      tag: payload.tag || "kavach-alert",
+      tag: payload.tag || "nexurity-alert",
     })
   );
 });

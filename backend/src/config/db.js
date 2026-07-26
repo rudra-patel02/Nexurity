@@ -12,7 +12,7 @@ const logDatabaseInfo = (message, metadata = {}) => {
     JSON.stringify({
       level: "info",
       message,
-      service: "kavach-backend",
+      service: "nexurity-backend",
       timestamp: new Date().toISOString(),
       ...metadata,
     })
@@ -133,7 +133,7 @@ export const connectDBWithRetry = async ({
           attempts,
           delayMs: attempt < attempts ? delayMs : 0,
           error: error.message,
-          service: "kavach-backend",
+          service: "nexurity-backend",
           timestamp: new Date().toISOString(),
         })
       );

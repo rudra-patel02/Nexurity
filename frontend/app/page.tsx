@@ -83,7 +83,7 @@ export default function Home() {
                 </span>
               </div>
               <h1 className="text-hologram mt-5 max-w-4xl text-4xl font-black tracking-tight md:text-6xl">
-                Kavach Operations Command
+                Nexurity Operations Command
               </h1>
               <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300 md:text-base">
                 Real-time machine intelligence, ESP32 telemetry, predictive risk,

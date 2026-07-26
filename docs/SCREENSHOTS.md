@@ -1,6 +1,6 @@
-# KAVACH Documentation Screenshots
+# Nexurity Documentation Screenshots
 
-These documentation screenshots were captured from the deployed KAVACH frontend for README, release, and presentation assets. Files are stored in `docs/screenshots/`.
+These documentation screenshots were captured from the deployed Nexurity frontend for README, release, and presentation assets. Files are stored in `docs/screenshots/`.
 
 | File | Screen | Acceptance Notes |
 | --- | --- | --- |

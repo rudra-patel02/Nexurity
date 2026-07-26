@@ -37,7 +37,7 @@ export const buildPushPayload = (notification = {}) => ({
   body:
     notification.message ||
     notification.description ||
-    "A Kavach alert requires attention.",
+    "A Nexurity alert requires attention.",
   data: {
     machineId: notification.machineId || "",
     notificationId: String(notification._id || notification.id || ""),
@@ -46,8 +46,8 @@ export const buildPushPayload = (notification = {}) => ({
       ? `/machines/${encodeURIComponent(notification.machineId)}`
       : "/alerts",
   },
-  tag: String(notification._id || notification.id || `kavach-${Date.now()}`),
-  title: notification.title || "KAVACH Alert",
+  tag: String(notification._id || notification.id || `nexurity-${Date.now()}`),
+  title: notification.title || "Nexurity Alert",
 });
 
 export const summarizePushDelivery = (subscriptions = [], payload = {}) => ({

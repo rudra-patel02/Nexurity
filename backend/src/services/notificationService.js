@@ -165,7 +165,7 @@ const buildNotification = ({
   const timelineEvent = {
     event: "ALERT_CREATED",
     at: new Date(),
-    actor: "KAVACH Alert Engine",
+    actor: "Nexurity Alert Engine",
     message,
     description: message,
   };

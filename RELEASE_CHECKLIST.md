@@ -1,4 +1,4 @@
-# KAVACH v1.0.0 Release Checklist
+# Nexurity v1.0.0 Release Checklist
 
 Status: prepared for release, not deployed or pushed automatically.
 
@@ -24,7 +24,7 @@ Status: prepared for release, not deployed or pushed automatically.
 - [ ] Set `ENABLE_SENSOR_SIMULATION=false` for real production telemetry.
 - [ ] Keep `IOT_ENABLED=false` unless MQTT broker credentials are intentionally configured.
 - [ ] Store `DEVICE_SECRET`, VAPID private key, and backup restore token only in the hosting provider secret manager.
-- [ ] Review the primary frontend alias `https://kavach-frontend.onrender.com`, which returned `503` during QA.
+- [ ] Review the primary frontend alias `https://nexurity-frontend.onrender.com`, which returned `503` during QA.
 
 ## Validation Gates
 
@@ -39,7 +39,7 @@ Status: prepared for release, not deployed or pushed automatically.
 
 ## Live QA Status
 
-- [x] Backend `/api/health` returned healthy on `https://kavach-spgh.onrender.com`.
+- [x] Backend `/api/health` returned healthy on `https://nexurity-backend.onrender.com`.
 - [x] Backend root endpoint returned service metadata.
 - [x] Invalid login and missing login inputs returned controlled errors.
 - [x] Protected API routes returned `401` without a token.
@@ -49,8 +49,8 @@ Status: prepared for release, not deployed or pushed automatically.
 - [x] Analytics CSV and weekly PDF report export returned `200`.
 - [x] Invalid machine and predictive IDs returned `404`.
 - [x] Socket.IO polling handshake returned `200`.
-- [x] CORS preflight from `https://kavach-frontend-4s8e.onrender.com` returned `204`.
-- [x] Healthy frontend route smoke passed on `https://kavach-frontend-4s8e.onrender.com`.
+- [x] CORS preflight from `https://nexurity-frontend.onrender.com` returned `204`.
+- [x] Healthy frontend route smoke passed on `https://nexurity-frontend.onrender.com`.
 - [x] Invalid frontend route returned `404`.
 
 ## Production Smoke Test After Manual Deploy

@@ -97,7 +97,7 @@ export default function LoginPage() {
                 Secure operations
               </p>
               <h1 className="text-hologram mt-2 text-5xl font-black tracking-tight">
-                KAVACH
+                Nexurity
               </h1>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function LoginPage() {
               Operator access
             </p>
             <h1 className="text-hologram mt-2 text-3xl font-black tracking-tight">
-              KAVACH Login
+              Nexurity Login
             </h1>
           </div>
 

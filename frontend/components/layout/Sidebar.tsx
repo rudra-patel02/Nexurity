@@ -107,7 +107,7 @@ export default function Sidebar() {
                   transition={{ duration: 0.18 }}
                 >
                   <h1 className="text-hologram text-3xl font-black tracking-[0.18em]">
-                    KAVACH
+                    Nexurity
                   </h1>
 
                   <p className="mt-3 text-sm leading-5 text-slate-400">
@@ -192,7 +192,7 @@ export default function Sidebar() {
 
       <div className="border-t border-cyan-400/10 p-5 text-xs text-slate-500">
         <div className="premium-tile rounded-lg px-4 py-3 text-center">
-          <p className="font-semibold text-slate-300">{isCollapsed ? "v1.0" : "Kavach v1.0"}</p>
+          <p className="font-semibold text-slate-300">{isCollapsed ? "v1.0" : "Nexurity v1.0"}</p>
           {!isCollapsed ? <p className="mt-1">Enterprise AI Platform</p> : null}
         </div>
       </div>

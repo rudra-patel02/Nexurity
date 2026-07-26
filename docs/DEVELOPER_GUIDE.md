@@ -1,6 +1,6 @@
 # Developer Guide
 
-This guide explains how to work on KAVACH safely.
+This guide explains how to work on Nexurity safely.
 
 ## Prerequisites
 
@@ -171,5 +171,5 @@ Device writes must use device authentication when `DEVICE_SECRET` is configured.
 ## Known Operational Notes
 
 - Backend startup requires MongoDB connectivity. If Atlas rejects the current IP, Express will not bind.
-- The healthy frontend deployment observed during QA was `https://kavach-frontend-4s8e.onrender.com`.
-- The primary frontend alias `https://kavach-frontend.onrender.com` returned `503` during QA and should be checked in Render.
+- The healthy frontend deployment observed during QA was `https://nexurity-frontend.onrender.com`.
+- The primary frontend alias `https://nexurity-frontend.onrender.com` returned `503` during QA and should be checked in Render.

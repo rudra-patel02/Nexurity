@@ -1,6 +1,6 @@
-# KAVACH Phase 14 Enterprise Operations
+# Nexurity Phase 14 Enterprise Operations
 
-Phase 14 expands KAVACH into a multi-tenant enterprise industrial operations platform.
+Phase 14 expands Nexurity into a multi-tenant enterprise industrial operations platform.
 
 ## Backend
 

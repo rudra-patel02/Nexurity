@@ -196,7 +196,7 @@ export default function AnalyticsPage() {
       const link = document.createElement("a");
 
       link.href = url;
-      link.download = `kavach-analytics-${Date.now()}.csv`;
+      link.download = `nexurity-analytics-${Date.now()}.csv`;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -294,7 +294,7 @@ export default function AnalyticsPage() {
               No Analytics Data Available
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-slate-400">
-              KAVACH is connected, but no machine telemetry has been received
+              Nexurity is connected, but no machine telemetry has been received
               for this view yet.
             </p>
           </section>

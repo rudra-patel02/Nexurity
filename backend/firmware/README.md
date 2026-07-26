@@ -1,6 +1,6 @@
-# KAVACH Edge Device Examples
+# Nexurity Edge Device Examples
 
-These examples show the expected registration, heartbeat, and telemetry shape for KAVACH Phase 11.
+These examples show the expected registration, heartbeat, and telemetry shape for Nexurity Phase 11.
 
 Required MQTT topics:
 

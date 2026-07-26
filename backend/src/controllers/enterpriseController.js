@@ -1257,7 +1257,7 @@ export const autoAssignWorkOrder = async (req, res) => {
       workOrder.status = "ASSIGNED";
     }
     workOrder.history.push({
-      actor: req.user?.email || "KAVACH Assignment Engine",
+      actor: req.user?.email || "Nexurity Assignment Engine",
       event: "ENGINEER_AUTO_ASSIGNED",
       message: `Assigned to ${selected.name}.`,
       to: selected.name,

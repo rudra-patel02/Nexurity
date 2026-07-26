@@ -11,7 +11,7 @@ const toSafeUser = (user) => {
 };
 
 const getCompanyProfile = () => ({
-  name: process.env.COMPANY_NAME || "KAVACH Industrial Operations",
+  name: process.env.COMPANY_NAME || "Nexurity Industrial Operations",
   site: process.env.COMPANY_SITE || "Primary Plant",
   industry: process.env.COMPANY_INDUSTRY || "Industrial Manufacturing",
   timezone: process.env.COMPANY_TIMEZONE || "Asia/Calcutta",

@@ -6,7 +6,7 @@ export default function TypingIndicator() {
       <div className="max-w-[82%] rounded-2xl border border-cyan-400/20 bg-slate-900/90 px-5 py-4 shadow-2xl shadow-cyan-950/20">
         <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase text-cyan-300">
           <Bot size={15} />
-          KAVACH Copilot
+          Nexurity Copilot
         </div>
 
         <div className="flex items-center gap-2">
