@@ -21,7 +21,7 @@ The current implementation is a split application:
 | Health check | `https://nexurity-backend.onrender.com/api/health` |
 | Socket.IO | `https://nexurity-backend.onrender.com/socket.io` |
 
-Recent QA found the backend and `nexurity-frontend-4s8e` deployment healthy. The primary frontend alias returned `503` during live checks and should be reviewed in Render before it is treated as the production entry point.
+Recent QA found the backend and `nexurity-frontend` deployment healthy. The primary frontend alias returned `503` during live checks and should be reviewed in Render before it is treated as the production entry point.
 
 ## Product Modules
 

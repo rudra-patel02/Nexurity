@@ -97,7 +97,7 @@ Use MongoDB Atlas for the closest production match.
 Example shape:
 
 ```env
-MONGO_URI=mongodb+srv://nexurity_user:<password>@cluster.example.mongodb.net/kavach
+MONGO_URI=mongodb+srv://nexurity_user:<password>@cluster.example.mongodb.net/nexurity
 ```
 
 Do not commit real connection strings.

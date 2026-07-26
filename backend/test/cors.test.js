@@ -8,7 +8,7 @@ import {
   parseCorsOrigins,
 } from "../src/config/environment.js";
 
-const PRODUCTION_ORIGIN = "https://kavach-1-7749.onrender.com";
+const PRODUCTION_ORIGIN = "https://nexurity-frontend.onrender.com";
 
 test("normalizes configured CORS origins", () => {
   assert.deepEqual(

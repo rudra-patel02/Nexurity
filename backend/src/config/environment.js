@@ -10,7 +10,7 @@ const booleanValues = new Map([
 ]);
 
 const DEFAULT_PRODUCTION_FRONTEND_ORIGIN =
-  "https://kavach-1-7749.onrender.com";
+  "https://nexurity-frontend.onrender.com";
 
 const normalizeOrigin = (origin) => {
   const value = String(origin || "").trim().replace(/\/+$/, "");

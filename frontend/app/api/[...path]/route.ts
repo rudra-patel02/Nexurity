@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 const BACKEND_ORIGIN =
   process.env.API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://kavach-spgh.onrender.com";
+  "https://nexurity-backend.onrender.com";
 
 const trimTrailingSlash = (value: string) => value.trim().replace(/\/+$/, "");
 const backendBaseUrl = trimTrailingSlash(BACKEND_ORIGIN).replace(/\/api$/i, "");

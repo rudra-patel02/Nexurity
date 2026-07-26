@@ -37,7 +37,7 @@ Required local gates:
 Live QA completed before release preparation:
 
 - Backend health, auth invalid inputs, protected routes, authenticated modules, exports, reports, Copilot, CORS preflight, and Socket.IO polling passed.
-- Healthy frontend route smoke passed on `nexurity-frontend-4s8e`.
+- Healthy frontend route smoke passed on `nexurity-frontend`.
 
 ## Production Readiness Notes
 

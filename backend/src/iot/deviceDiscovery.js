@@ -49,7 +49,7 @@ export const getDeviceRegistrationConfig = ({
   apiBaseUrl =
     process.env.PUBLIC_API_BASE_URL ||
     process.env.NEXT_PUBLIC_API_URL ||
-    "https://kavach-spgh.onrender.com",
+    "https://nexurity-backend.onrender.com",
   deviceId,
   machineId,
   mqttBrokerUrl = process.env.MQTT_BROKER_URL || "mqtt://mqtt:1883",

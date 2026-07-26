@@ -4,7 +4,7 @@ const BACKEND_ORIGIN =
   process.env.API_URL ||
   process.env.NEXT_PUBLIC_SOCKET_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://kavach-spgh.onrender.com";
+  "https://nexurity-backend.onrender.com";
 
 const backendBaseUrl = BACKEND_ORIGIN.trim().replace(/\/+$/, "").replace(/\/api$/i, "");
 

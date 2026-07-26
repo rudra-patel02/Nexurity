@@ -5,12 +5,12 @@ import connectDB, { getMongoUriMetadata } from "../src/config/db.js";
 
 test("extracts MongoDB URI metadata without credentials", () => {
   const metadata = getMongoUriMetadata(
-    "mongodb+srv://user:secret@example.mongodb.net/kavach?retryWrites=true&w=majority"
+    "mongodb+srv://user:secret@example.mongodb.net/nexurity?retryWrites=true&w=majority"
   );
 
   assert.deepEqual(metadata, {
     configured: true,
-    database: "kavach",
+    database: "nexurity",
     hosts: ["example.mongodb.net"],
     protocol: "mongodb+srv",
   });
