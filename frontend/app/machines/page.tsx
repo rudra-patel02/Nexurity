@@ -212,8 +212,8 @@ export default function MachinesPage() {
 
       </div>
 
-      <section className="premium-card rounded-2xl p-4">
-        <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+      <section className="premium-card flex h-[min(56vh,580px)] min-h-[520px] flex-col rounded-2xl p-4">
+        <div className="mb-3 flex shrink-0 flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-xl font-black">Digital Twin Factory</h2>
             <p className="mt-1 text-sm text-slate-400">
@@ -225,11 +225,13 @@ export default function MachinesPage() {
           </span>
         </div>
 
-        <div className="h-[430px] overflow-hidden rounded-xl border border-slate-800 bg-slate-950/80">
+        <div className="relative min-h-0 flex-1 overflow-hidden rounded-xl border border-slate-800 bg-slate-950/80">
           <FactoryScene
             machineData={filteredMachines}
             showSensorOverlays={false}
-            minHeight={430}
+            showMachineLabels={false}
+            minHeight={0}
+            sceneScale={0.94}
           />
         </div>
       </section>

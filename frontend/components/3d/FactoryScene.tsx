@@ -44,7 +44,9 @@ interface FactorySceneProps {
   selectedMachineId?: string | null;
   onMachineSelect?: (profile: EnterpriseMachineProfile) => void;
   showSensorOverlays?: boolean;
+  showMachineLabels?: boolean;
   minHeight?: number;
+  sceneScale?: number;
 }
 
 type SceneMachineInput = {
@@ -270,7 +272,9 @@ export default function FactoryScene({
   selectedMachineId,
   onMachineSelect,
   showSensorOverlays = true,
+  showMachineLabels = true,
   minHeight = 520,
+  sceneScale = 1,
 }: FactorySceneProps) {
   const [hoveredMachineId, setHoveredMachineId] = useState<string | null>(null);
   const machines = useMemo<MachineType[]>(
@@ -316,174 +320,186 @@ export default function FactoryScene({
     >
       <Canvas
         camera={{
-          position: [9, 7, 11],
-          fov: 45,
+          position: [8.4, 5.4, 9.2],
+          fov: 38,
+          near: 0.1,
+          far: 80,
         }}
+        shadows
         dpr={[1, 1.25]}
         performance={{ debounce: 240, min: 0.6 }}
-        gl={{ antialias: true, powerPreference: "high-performance" }}
+        gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+        style={{ display: "block", height: "100%", width: "100%" }}
       >
         <color attach="background" args={["#0F172A"]} />
+        <fog attach="fog" args={["#0f172a", 18, 32]} />
 
-        {/* Lighting */}
-        <ambientLight intensity={0.45} color="#94a3b8" />
+        <hemisphereLight
+          intensity={0.82}
+          groundColor="#020617"
+          color="#e0f2fe"
+        />
+        <ambientLight intensity={0.28} color="#94a3b8" />
 
         <directionalLight
-          position={[10, 12, 8]}
-          intensity={2.8}
+          position={[8, 12, 7]}
+          intensity={2.2}
           color="#ffffff"
+          castShadow
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
         />
 
-        <pointLight position={[0, 5, 0]} intensity={2} color="#38bdf8" />
-        <pointLight position={[3, 3, -2]} intensity={1.5} color="#22c55e" />
-        <pointLight position={[-3, 3, -2]} intensity={1.5} color="#f97316" />
+        <pointLight position={[0, 4.6, 2]} intensity={1.55} color="#38bdf8" />
+        <pointLight position={[4, 3, -2]} intensity={1.25} color="#22c55e" />
+        <pointLight position={[-4, 3, -2]} intensity={1.15} color="#f97316" />
 
-        {/* Environment */}
-        <Ground />
-        <Road />
+        <group position={[0, -0.18, 0]} scale={sceneScale}>
+          <Ground />
+          <Road />
 
-        {/* Street Lights */}
-        <StreetLight position={[-7, 0, 7]} />
-        <StreetLight position={[-3, 0, 7]} />
-        <StreetLight position={[1, 0, 7]} />
-        <StreetLight position={[5, 0, 7]} />
+          <StreetLight position={[-7, 0, 7]} />
+          <StreetLight position={[-3, 0, 7]} />
+          <StreetLight position={[1, 0, 7]} />
+          <StreetLight position={[5, 0, 7]} />
 
-        {/* Factory */}
-        <FactoryBuilding />
-        <ConveyorBelt running={isPlantRunning} />
-        <Conveyor running={machines[2]?.status === "Running"} />
-        <Tank running={machines[0]?.status === "Running"} />
-        <Pipe running={isPlantRunning} />
-        <Chimney running={isPlantRunning} />
-        <RobotArm running={machines[3]?.status === "Running"} />
-        <ProductionFlow running={isPlantRunning} />
+          <FactoryBuilding />
+          <ConveyorBelt running={isPlantRunning} />
+          <Conveyor running={machines[2]?.status === "Running"} />
+          <Tank running={machines[0]?.status === "Running"} />
+          <Pipe running={isPlantRunning} />
+          <Chimney running={isPlantRunning} />
+          <RobotArm running={machines[3]?.status === "Running"} />
+          <ProductionFlow running={isPlantRunning} />
 
-        {/* Machines */}
-        {machines.map((machine, index) => (
-          <group
-            key={machine.machineId}
-            position={positions[index] || [index * 2.6 - 5.2, 0, -2]}
-            onClick={(event) => {
-              event.stopPropagation();
+          {machines.map((machine, index) => (
+            <group
+              key={machine.machineId}
+              position={positions[index] || [index * 2.6 - 5.2, 0, -2]}
+              onClick={(event) => {
+                event.stopPropagation();
 
-              if (machine.profile) {
-                onMachineSelect?.(machine.profile);
-              }
-            }}
-            onPointerOver={(event) => {
-              event.stopPropagation();
-              setHoveredMachineId(machine.machineId);
-              document.body.style.cursor = machine.profile ? "pointer" : "default";
-            }}
-            onPointerOut={() => {
-              setHoveredMachineId(null);
-              document.body.style.cursor = "default";
-            }}
-          >
-            <Machine
-              machine={getSceneMachine(machine)}
-              selected={selectedMachineId === machine.machineId}
-              hovered={hoveredMachineId === machine.machineId}
-            />
-
-            <StatusLight
-              position={[0, 1.55, 0]}
-              color={getStatusColor(machine.status)}
-              intensity={machine.status === "Critical" ? 4 : 2}
-              size={machine.status === "Critical" ? 0.12 : 0.08}
-            />
-            <AlarmMarker profile={machine.profile} />
-            {showSensorOverlays || selectedMachineId === machine.machineId ? (
-              <SensorOverlay machine={machine} />
-            ) : null}
-
-            <group position={[0, 2.15, 0]}>
-              <MachineLabel
+                if (machine.profile) {
+                  onMachineSelect?.(machine.profile);
+                }
+              }}
+              onPointerOver={(event) => {
+                event.stopPropagation();
+                setHoveredMachineId(machine.machineId);
+                document.body.style.cursor = machine.profile ? "pointer" : "default";
+              }}
+              onPointerOut={() => {
+                setHoveredMachineId(null);
+                document.body.style.cursor = "default";
+              }}
+            >
+              <Machine
                 machine={getSceneMachine(machine)}
-                riskScore={machine.profile?.riskScore}
+                selected={selectedMachineId === machine.machineId}
+                hovered={hoveredMachineId === machine.machineId}
               />
+
+              <StatusLight
+                position={[0, 1.55, 0]}
+                color={getStatusColor(machine.status)}
+                intensity={machine.status === "Critical" ? 4 : 2}
+                size={machine.status === "Critical" ? 0.12 : 0.08}
+              />
+              <AlarmMarker profile={machine.profile} />
+              {showSensorOverlays || selectedMachineId === machine.machineId ? (
+                <SensorOverlay machine={machine} />
+              ) : null}
+
+              {showMachineLabels ? (
+                <group position={[0, 2.15, 0]}>
+                  <MachineLabel
+                    machine={getSceneMachine(machine)}
+                    riskScore={machine.profile?.riskScore}
+                  />
+                </group>
+              ) : null}
+
+              {hoveredMachineId === machine.machineId ? (
+                <Html position={[0, 3.05, 0]} center style={{ pointerEvents: "none" }}>
+                  <div className="w-56 rounded-xl border border-cyan-400/30 bg-slate-950/95 p-3 text-xs text-slate-200 shadow-2xl shadow-black/40">
+                    <div className="font-bold text-white">{machine.name}</div>
+                    <div className="mt-1 text-slate-400">
+                      {machine.machineId} - {machine.department || "Production"}
+                    </div>
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                      <span>
+                        Health {formatMachineMetric(machine.profile?.ai?.healthPercent || machine.health, "%")}
+                      </span>
+                      <span>Temp {formatMachineMetric(machine.temperature, " C")}</span>
+                      <span>Vib {formatMachineMetric(machine.vibration)}</span>
+                      <span>
+                        AI Risk {formatMachineMetric(machine.profile?.ai?.riskPercent || machine.profile?.riskScore, "%")}
+                      </span>
+                      <span>
+                        RUL {formatMachineMetric(machine.profile?.ai?.remainingUsefulLifeHours || machine.profile?.remainingUsefulLifeHours, "h")}
+                      </span>
+                      <span>
+                        Fail {formatMachineMetric(machine.profile?.ai?.failureProbability || machine.profile?.failureProbability, "%")}
+                      </span>
+                    </div>
+                    <div className="mt-2 text-cyan-200">
+                      {machine.profile?.ai?.anomaly?.severity || "Low"} anomaly
+                    </div>
+                    <div className="mt-1 line-clamp-2 text-slate-400">
+                      {machine.profile?.ai?.rootCauseSummary || "No root cause active"}
+                    </div>
+                  </div>
+                </Html>
+              ) : null}
             </group>
+          ))}
 
-            {hoveredMachineId === machine.machineId ? (
-              <Html position={[0, 3.05, 0]} center style={{ pointerEvents: "none" }}>
-                <div className="w-56 rounded-xl border border-cyan-400/30 bg-slate-950/95 p-3 text-xs text-slate-200 shadow-2xl shadow-black/40">
-                  <div className="font-bold text-white">{machine.name}</div>
-                  <div className="mt-1 text-slate-400">
-                    {machine.machineId} - {machine.department || "Production"}
+          {selectedMachine?.profile ? (
+            <Html position={[0, 4.8, 2.6]} center style={{ pointerEvents: "none" }}>
+              <div className="w-80 rounded-2xl border border-cyan-400/30 bg-slate-950/92 p-4 text-xs text-slate-300 shadow-2xl shadow-black/50 backdrop-blur">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <div className="text-sm font-black text-white">
+                      {selectedMachine.profile.machine.name}
+                    </div>
+                    <div className="mt-1 text-slate-500">
+                      {selectedMachine.profile.machine.machineId}
+                    </div>
                   </div>
-                  <div className="mt-2 grid grid-cols-2 gap-2">
-                    <span>
-                      Health {formatMachineMetric(machine.profile?.ai?.healthPercent || machine.health, "%")}
-                    </span>
-                    <span>Temp {formatMachineMetric(machine.temperature, " C")}</span>
-                    <span>Vib {formatMachineMetric(machine.vibration)}</span>
-                    <span>
-                      AI Risk {formatMachineMetric(machine.profile?.ai?.riskPercent || machine.profile?.riskScore, "%")}
-                    </span>
-                    <span>
-                      RUL {formatMachineMetric(machine.profile?.ai?.remainingUsefulLifeHours || machine.profile?.remainingUsefulLifeHours, "h")}
-                    </span>
-                    <span>
-                      Fail {formatMachineMetric(machine.profile?.ai?.failureProbability || machine.profile?.failureProbability, "%")}
-                    </span>
-                  </div>
-                  <div className="mt-2 text-cyan-200">
-                    {machine.profile?.ai?.anomaly?.severity || "Low"} anomaly
-                  </div>
-                  <div className="mt-1 line-clamp-2 text-slate-400">
-                    {machine.profile?.ai?.rootCauseSummary || "No root cause active"}
+                  <div className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-2 py-1 font-bold text-cyan-100">
+                    Digital Twin Link
                   </div>
                 </div>
-              </Html>
-            ) : null}
-          </group>
-        ))}
-
-        {selectedMachine?.profile ? (
-          <Html position={[0, 4.8, 2.6]} center style={{ pointerEvents: "none" }}>
-            <div className="w-80 rounded-2xl border border-cyan-400/30 bg-slate-950/92 p-4 text-xs text-slate-300 shadow-2xl shadow-black/50 backdrop-blur">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <div className="text-sm font-black text-white">
-                    {selectedMachine.profile.machine.name}
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  <div>
+                    <div className="text-slate-500">Risk</div>
+                    <div className="font-bold text-white">{formatMachineMetric(selectedMachine.profile.riskScore, "%")}</div>
                   </div>
-                  <div className="mt-1 text-slate-500">
-                    {selectedMachine.profile.machine.machineId}
+                  <div>
+                    <div className="text-slate-500">RUL</div>
+                    <div className="font-bold text-white">{formatMachineMetric(selectedMachine.profile.remainingUsefulLifeHours, "h")}</div>
                   </div>
-                </div>
-                <div className="rounded-full border border-cyan-400/30 bg-cyan-500/10 px-2 py-1 font-bold text-cyan-100">
-                  Digital Twin Link
+                  <div>
+                    <div className="text-slate-500">Alarms</div>
+                    <div className="font-bold text-white">{selectedMachine.profile.criticalAlerts.length}</div>
+                  </div>
                 </div>
               </div>
-              <div className="mt-3 grid grid-cols-3 gap-2">
-                <div>
-                  <div className="text-slate-500">Risk</div>
-                  <div className="font-bold text-white">{formatMachineMetric(selectedMachine.profile.riskScore, "%")}</div>
-                </div>
-                <div>
-                  <div className="text-slate-500">RUL</div>
-                  <div className="font-bold text-white">{formatMachineMetric(selectedMachine.profile.remainingUsefulLifeHours, "h")}</div>
-                </div>
-                <div>
-                  <div className="text-slate-500">Alarms</div>
-                  <div className="font-bold text-white">{selectedMachine.profile.criticalAlerts.length}</div>
-                </div>
-              </div>
-            </div>
-          </Html>
-        ) : null}
+            </Html>
+          ) : null}
+        </group>
 
         <OrbitControls
-          target={[0, 1, 0]}
+          target={[0, 1.35, -0.8]}
           enableRotate
           enableZoom
-          enablePan
+          enablePan={false}
           enableDamping
           dampingFactor={0.08}
-          minDistance={6}
-          maxDistance={18}
-          minPolarAngle={Math.PI / 4}
-          maxPolarAngle={Math.PI / 2.05}
+          minDistance={7}
+          maxDistance={15}
+          minPolarAngle={Math.PI / 4.1}
+          maxPolarAngle={Math.PI / 2.18}
         />
       </Canvas>
     </div>
