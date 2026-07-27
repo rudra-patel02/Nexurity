@@ -76,21 +76,22 @@ export default function MachinesPage() {
           />
         </label>
 
-      <div className="premium-card overflow-x-auto rounded-2xl">
+      <div className="premium-card rounded-2xl">
+        <div className="w-full overflow-x-auto overscroll-x-contain pb-2">
 
-        <table className="w-full min-w-[1280px] table-fixed text-sm">
+        <table className="w-full min-w-[1340px] table-fixed text-sm">
 
           <thead className="bg-slate-950/70 text-xs uppercase tracking-[0.16em] text-slate-500">
             <tr>
-              <th className="w-[130px] whitespace-nowrap p-3 text-left">Machine ID</th>
-              <th className="w-[220px] whitespace-nowrap p-3 text-left">Machine</th>
-              <th className="w-[170px] whitespace-nowrap p-3 text-left">Department</th>
-              <th className="w-[150px] whitespace-nowrap p-3 text-left">Status</th>
-              <th className="w-[110px] whitespace-nowrap p-3 text-left">Health</th>
-              <th className="w-[150px] whitespace-nowrap p-3 text-left">Temperature</th>
-              <th className="w-[130px] whitespace-nowrap p-3 text-left">AI Risk</th>
-              <th className="w-[180px] whitespace-nowrap p-3 text-left">Maintenance</th>
-              <th className="w-[140px] whitespace-nowrap p-3 text-left">Actions</th>
+              <th className="w-[128px] whitespace-nowrap px-4 py-3 text-left">Machine ID</th>
+              <th className="w-[210px] whitespace-nowrap px-4 py-3 text-left">Machine</th>
+              <th className="w-[160px] whitespace-nowrap px-4 py-3 text-left">Department</th>
+              <th className="w-[170px] whitespace-nowrap px-4 py-3 text-left">Status</th>
+              <th className="w-[105px] whitespace-nowrap px-4 py-3 text-left">Health</th>
+              <th className="w-[150px] whitespace-nowrap px-4 py-3 text-left">Temperature</th>
+              <th className="w-[130px] whitespace-nowrap px-4 py-3 text-left">AI Risk</th>
+              <th className="w-[180px] whitespace-nowrap px-4 py-3 text-left">Maintenance</th>
+              <th className="w-[207px] whitespace-nowrap px-4 py-3 pr-8 text-left">Actions</th>
             </tr>
           </thead>
 
@@ -123,13 +124,13 @@ export default function MachinesPage() {
                   key={machine._id}
                   className="border-b border-slate-800/80 transition hover:bg-cyan-400/5"
                 >
-                  <td className="p-3 font-semibold text-cyan-100">{machine.machineId}</td>
+                  <td className="px-4 py-3 font-semibold text-cyan-100">{machine.machineId}</td>
 
-                  <td className="p-3 font-semibold">{machine.name}</td>
+                  <td className="px-4 py-3 font-semibold">{machine.name}</td>
 
-                  <td className="p-3 text-slate-300">{machine.department}</td>
+                  <td className="px-4 py-3 text-slate-300">{machine.department}</td>
 
-                  <td className="whitespace-nowrap p-3">
+                  <td className="whitespace-nowrap px-4 py-3">
                     <span
                       className={`status-pill whitespace-nowrap ${
                         machine.status === "Running"
@@ -146,7 +147,7 @@ export default function MachinesPage() {
                   </td>
 
                   <td
-                    className={`p-3 font-bold ${
+                    className={`px-4 py-3 font-bold ${
                       machine.health >= 90
                         ? "text-green-400"
                         : machine.health >= 60
@@ -158,7 +159,7 @@ export default function MachinesPage() {
                   </td>
 
                   <td
-                    className={`p-3 font-bold ${
+                    className={`px-4 py-3 font-bold ${
                       Number(machine.temperature ?? 0) < 70
                         ? "text-green-400"
                         : Number(machine.temperature ?? 0) < 90
@@ -169,7 +170,7 @@ export default function MachinesPage() {
                     {Number(machine.temperature ?? 0).toFixed(1)} C
                   </td>
 
-                  <td className="whitespace-nowrap p-3">
+                  <td className="whitespace-nowrap px-4 py-3">
                     <span
                       className={`status-pill whitespace-nowrap ${
                         machine.aiPrediction?.failureRisk === "High"
@@ -183,7 +184,7 @@ export default function MachinesPage() {
                     </span>
                   </td>
 
-                  <td className="p-3">
+                  <td className="px-4 py-3">
                     <div className="text-sm">
                       <div className="font-semibold">
                         {machine.aiPrediction?.maintenancePriority ?? "-"}
@@ -195,10 +196,10 @@ export default function MachinesPage() {
                     </div>
                   </td>
 
-                  <td className="whitespace-nowrap p-3">
+                  <td className="whitespace-nowrap px-4 py-3 pr-8">
                     <Link
                       href={`/machines/${machine.machineId}`}
-                      className="premium-button inline-flex whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-semibold"
+                      className="premium-button inline-flex min-w-[72px] justify-center whitespace-nowrap rounded-lg px-4 py-1.5 text-sm font-semibold"
                     >
                       View
                     </Link>
@@ -209,6 +210,7 @@ export default function MachinesPage() {
 
           </tbody>
         </table>
+        </div>
 
       </div>
 
