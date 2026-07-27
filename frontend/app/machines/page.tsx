@@ -39,7 +39,7 @@ export default function MachinesPage() {
 
   return (
     <DashboardLayout>
-      <div className="page-stack space-y-4 text-white surface-enter">
+      <div className="page-stack min-w-0 space-y-4 text-white surface-enter">
         <section className="premium-card rounded-2xl p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -76,22 +76,22 @@ export default function MachinesPage() {
           />
         </label>
 
-      <div className="w-full rounded-2xl border border-cyan-400/15 bg-slate-950/70 shadow-2xl shadow-cyan-950/10 backdrop-blur-2xl">
-        <div className="w-full max-w-full overflow-x-auto overscroll-x-contain">
+      <div className="w-full min-w-0 max-w-full overflow-visible rounded-2xl border border-cyan-400/15 bg-slate-950/70 shadow-2xl shadow-cyan-950/10 backdrop-blur-2xl">
+        <div className="block w-full min-w-0 max-w-full overflow-x-auto overflow-y-visible overscroll-x-contain">
 
-        <table className="w-full min-w-[1440px] table-fixed text-sm xl:min-w-full">
+        <table className="w-full min-w-[1440px] table-fixed text-sm">
 
           <thead className="bg-slate-950/70 text-xs uppercase tracking-[0.16em] text-slate-500">
             <tr>
-              <th className="w-[8.5%] whitespace-nowrap px-4 py-3 text-left">Machine ID</th>
-              <th className="w-[15%] whitespace-nowrap px-4 py-3 text-left">Machine</th>
-              <th className="w-[11%] whitespace-nowrap px-4 py-3 text-left">Department</th>
-              <th className="w-[12%] whitespace-nowrap px-4 py-3 text-left">Status</th>
-              <th className="w-[7%] whitespace-nowrap px-4 py-3 text-left">Health</th>
-              <th className="w-[10.5%] whitespace-nowrap px-4 py-3 text-left">Temperature</th>
-              <th className="w-[9%] whitespace-nowrap px-4 py-3 text-left">AI Risk</th>
-              <th className="w-[13%] whitespace-nowrap px-4 py-3 text-left">Maintenance</th>
-              <th className="w-[14%] whitespace-nowrap px-4 py-3 pr-6 text-left">Actions</th>
+              <th className="w-[120px] whitespace-nowrap px-4 py-3 text-left">Machine ID</th>
+              <th className="w-[210px] whitespace-nowrap px-4 py-3 text-left">Machine</th>
+              <th className="w-[160px] whitespace-nowrap px-4 py-3 text-left">Department</th>
+              <th className="w-[160px] whitespace-nowrap px-4 py-3 text-left">Status</th>
+              <th className="w-[105px] whitespace-nowrap px-4 py-3 text-left">Health</th>
+              <th className="w-[150px] whitespace-nowrap px-4 py-3 text-left">Temperature</th>
+              <th className="w-[130px] whitespace-nowrap px-4 py-3 text-left">AI Risk</th>
+              <th className="w-[170px] whitespace-nowrap px-4 py-3 text-left">Maintenance</th>
+              <th className="w-[235px] whitespace-nowrap px-4 py-3 pr-10 text-left">Actions</th>
             </tr>
           </thead>
 
@@ -196,7 +196,7 @@ export default function MachinesPage() {
                     </div>
                   </td>
 
-                  <td className="whitespace-nowrap px-4 py-3 pr-6">
+                  <td className="whitespace-nowrap px-4 py-3 pr-10">
                     <Link
                       href={`/machines/${machine.machineId}`}
                       className="premium-button inline-flex min-w-[72px] justify-center whitespace-nowrap rounded-lg px-4 py-1.5 text-sm font-semibold"
