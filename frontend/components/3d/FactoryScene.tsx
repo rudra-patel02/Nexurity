@@ -45,6 +45,7 @@ interface FactorySceneProps {
   onMachineSelect?: (profile: EnterpriseMachineProfile) => void;
   showSensorOverlays?: boolean;
   showMachineLabels?: boolean;
+  animated?: boolean;
   minHeight?: number;
   sceneScale?: number;
 }
@@ -273,6 +274,7 @@ export default function FactoryScene({
   onMachineSelect,
   showSensorOverlays = true,
   showMachineLabels = true,
+  animated = true,
   minHeight = 520,
   sceneScale = 1,
 }: FactorySceneProps) {
@@ -325,8 +327,9 @@ export default function FactoryScene({
           near: 0.1,
           far: 80,
         }}
-        shadows
-        dpr={[1, 1.25]}
+        frameloop={animated ? "always" : "demand"}
+        shadows={animated}
+        dpr={[1, animated ? 1.25 : 1]}
         performance={{ debounce: 240, min: 0.6 }}
         gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
         style={{ display: "block", height: "100%", width: "100%" }}
@@ -364,13 +367,13 @@ export default function FactoryScene({
           <StreetLight position={[5, 0, 7]} />
 
           <FactoryBuilding />
-          <ConveyorBelt running={isPlantRunning} />
-          <Conveyor running={machines[2]?.status === "Running"} />
-          <Tank running={machines[0]?.status === "Running"} />
-          <Pipe running={isPlantRunning} />
-          <Chimney running={isPlantRunning} />
-          <RobotArm running={machines[3]?.status === "Running"} />
-          <ProductionFlow running={isPlantRunning} />
+          <ConveyorBelt running={animated && isPlantRunning} />
+          <Conveyor running={animated && machines[2]?.status === "Running"} />
+          <Tank running={animated && machines[0]?.status === "Running"} />
+          <Pipe running={animated && isPlantRunning} />
+          <Chimney running={animated && isPlantRunning} />
+          <RobotArm running={animated && machines[3]?.status === "Running"} />
+          <ProductionFlow running={animated && isPlantRunning} />
 
           {machines.map((machine, index) => (
             <group

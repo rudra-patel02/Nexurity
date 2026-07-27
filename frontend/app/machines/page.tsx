@@ -3,11 +3,20 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Loader2, Plus, Search } from "lucide-react";
-import FactoryScene from "@/components/3d/FactoryScene";
+import dynamic from "next/dynamic";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { useMachineFeed, useMachineFeedReady } from "@/hooks/useMachineFeed";
 import { useRouter } from "next/navigation";
 import type { MachinePrediction, MachineStatus } from "@/types/machine";
+
+const FactoryScene = dynamic(() => import("@/components/3d/FactoryScene"), {
+  loading: () => (
+    <div className="flex h-full min-h-[420px] items-center justify-center text-sm font-semibold text-cyan-200">
+      Loading digital twin
+    </div>
+  ),
+  ssr: false,
+});
 
 type Machine = {
   _id: string;
@@ -229,6 +238,7 @@ export default function MachinesPage() {
 
         <div className="relative min-h-0 flex-1 overflow-hidden rounded-xl border border-slate-800 bg-slate-950/80">
           <FactoryScene
+            animated={false}
             machineData={filteredMachines}
             showSensorOverlays={false}
             showMachineLabels={false}
