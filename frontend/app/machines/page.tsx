@@ -7,20 +7,17 @@ import FactoryScene from "@/components/3d/FactoryScene";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import { useMachineFeed, useMachineFeedReady } from "@/hooks/useMachineFeed";
 import { useRouter } from "next/navigation";
+import type { MachinePrediction, MachineStatus } from "@/types/machine";
 
 type Machine = {
   _id: string;
   machineId: string;
   name: string;
   department: string;
-  status: string;
+  status: MachineStatus;
   health: number;
   temperature: number;
-  aiPrediction?: {
-    failureRisk: string;
-    maintenancePriority: string;
-    maintenanceInDays: number;
-  };
+  aiPrediction?: MachinePrediction;
 };
 
 export default function MachinesPage() {
@@ -216,11 +213,25 @@ export default function MachinesPage() {
       </div>
 
       <section className="premium-card rounded-2xl p-4">
-        <h2 className="mb-3 text-xl font-black">
-          Digital Twin Factory
-        </h2>
+        <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-black">Digital Twin Factory</h2>
+            <p className="mt-1 text-sm text-slate-400">
+              Live 3D view of the visible machine fleet.
+            </p>
+          </div>
+          <span className="rounded-full border border-cyan-400/25 bg-cyan-500/10 px-3 py-1 text-xs font-bold text-cyan-100">
+            {filteredMachines.slice(0, 5).length} assets mapped
+          </span>
+        </div>
 
-        <FactoryScene />
+        <div className="h-[430px] overflow-hidden rounded-xl border border-slate-800 bg-slate-950/80">
+          <FactoryScene
+            machineData={filteredMachines}
+            showSensorOverlays={false}
+            minHeight={430}
+          />
+        </div>
       </section>
 
       </div>

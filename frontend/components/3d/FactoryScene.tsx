@@ -19,7 +19,11 @@ import RobotArm from "./RobotArm";
 import Road from "./Road";
 import StreetLight from "./StreetLight";
 import type { EnterpriseMachineProfile } from "@/lib/enterpriseAnalytics";
-import type { MachineDisplayData, MachineStatus } from "@/types/machine";
+import type {
+  MachineDisplayData,
+  MachinePrediction,
+  MachineStatus,
+} from "@/types/machine";
 
 type MachineType = {
   id: number;
@@ -30,15 +34,29 @@ type MachineType = {
   temperature?: number;
   vibration?: number;
   department?: string;
+  aiPrediction?: MachinePrediction;
   profile?: EnterpriseMachineProfile;
 };
 
 interface FactorySceneProps {
   profiles?: EnterpriseMachineProfile[];
+  machineData?: SceneMachineInput[];
   selectedMachineId?: string | null;
   onMachineSelect?: (profile: EnterpriseMachineProfile) => void;
   showSensorOverlays?: boolean;
+  minHeight?: number;
 }
+
+type SceneMachineInput = {
+  machineId: string;
+  name: string;
+  status?: string;
+  health?: number;
+  temperature?: number;
+  vibration?: number;
+  department?: string;
+  aiPrediction?: MachinePrediction;
+};
 
 const fallbackMachines: MachineType[] = [
   { id: 1, machineId: "DEMO-01", name: "Tank", status: "Running", health: 96 },
@@ -64,12 +82,27 @@ const getStatusColor = (status: MachineStatus | undefined) => {
   return "red";
 };
 
+const normalizeStatus = (status: string | undefined): MachineStatus => {
+  if (
+    status === "Running" ||
+    status === "Warning" ||
+    status === "Critical" ||
+    status === "Offline" ||
+    status === "Idle" ||
+    status === "Maintenance"
+  ) {
+    return status;
+  }
+
+  return "Idle";
+};
+
 const getSceneMachine = (machine: MachineType): MachineDisplayData => ({
   name: machine.name,
   status: machine.status,
   health: machine.health,
   temperature: machine.temperature,
-  aiPrediction: machine.profile?.machine.aiPrediction,
+  aiPrediction: machine.aiPrediction || machine.profile?.machine.aiPrediction,
   aiIntelligence: machine.profile?.ai || machine.profile?.machine.aiIntelligence,
   aiFailureProbability:
     machine.profile?.ai?.failureProbability ||
@@ -233,9 +266,11 @@ const SensorOverlay = ({ machine }: { machine: MachineType }) => {
 
 export default function FactoryScene({
   profiles = [],
+  machineData = [],
   selectedMachineId,
   onMachineSelect,
   showSensorOverlays = true,
+  minHeight = 520,
 }: FactorySceneProps) {
   const [hoveredMachineId, setHoveredMachineId] = useState<string | null>(null);
   const machines = useMemo<MachineType[]>(
@@ -252,8 +287,20 @@ export default function FactoryScene({
             department: profile.machine.department,
             profile,
           }))
+        : machineData.length > 0
+          ? machineData.slice(0, positions.length).map((machine, index) => ({
+              id: index + 1,
+              machineId: machine.machineId,
+              name: machine.name,
+              status: normalizeStatus(machine.status),
+              health: machine.health,
+              temperature: machine.temperature,
+              vibration: machine.vibration,
+              department: machine.department,
+              aiPrediction: machine.aiPrediction,
+            }))
         : fallbackMachines,
-    [profiles]
+    [machineData, profiles]
   );
   const isPlantRunning = machines.some((machine) => machine.status === "Running");
   const selectedMachine = machines.find((machine) => machine.machineId === selectedMachineId);
@@ -263,7 +310,7 @@ export default function FactoryScene({
       style={{
         width: "100%",
         height: "100%",
-        minHeight: 520,
+        minHeight,
         overflow: "hidden",
       }}
     >
