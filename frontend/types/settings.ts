@@ -4,6 +4,7 @@ export interface SettingsProfile {
   email: string;
   role: string;
   department: string;
+  avatarUrl?: string;
   phone?: string;
   employeeId?: string;
   status?: string;

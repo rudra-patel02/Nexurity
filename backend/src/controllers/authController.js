@@ -21,6 +21,7 @@ const toSafeUser = (user) => {
   const safeUser = user.toObject();
   delete safeUser.password;
   delete safeUser.refreshToken;
+  safeUser.avatarUrl = safeUser.avatarUrl || "/images/profile-avatar.jpeg";
   return safeUser;
 };
 

@@ -7,6 +7,7 @@ const toSafeUser = (user) => {
   const value = user && typeof user.toObject === "function" ? user.toObject() : user;
   delete value.password;
   delete value.refreshToken;
+  value.avatarUrl = value.avatarUrl || "/images/profile-avatar.jpeg";
   return value;
 };
 

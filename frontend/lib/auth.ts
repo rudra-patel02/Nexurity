@@ -7,10 +7,13 @@ export interface StoredUser {
   email?: string;
   role?: string;
   department?: string;
+  avatarUrl?: string;
   organizationId?: string;
   plantIds?: string[];
   activePlantId?: string;
 }
+
+export const DEFAULT_PROFILE_AVATAR_URL = "/images/profile-avatar.jpeg";
 
 const roleAliases: Record<string, string> = {
   Admin: "Super Admin",

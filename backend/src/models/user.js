@@ -55,6 +55,12 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
 
+    avatarUrl: {
+      type: String,
+      default: "/images/profile-avatar.jpeg",
+      trim: true,
+    },
+
     tenantId: {
       type: String,
       default: "",

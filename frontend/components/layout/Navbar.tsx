@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -13,12 +14,15 @@ import {
   Plus,
   Search,
   Settings,
-  UserCircle,
   UserRound,
   X,
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
-import { clearStoredAuth, useStoredUser } from "@/lib/auth";
+import {
+  DEFAULT_PROFILE_AVATAR_URL,
+  clearStoredAuth,
+  useStoredUser,
+} from "@/lib/auth";
 import { globalSearch } from "@/lib/search";
 import type { GlobalSearchResult } from "@/types/search";
 import ThemeModeControl from "./ThemeModeControl";
@@ -206,6 +210,7 @@ export default function Navbar() {
 
   const displayName = user?.name || user?.email || "Profile";
   const displayRole = user?.role || "Viewer";
+  const profileAvatarUrl = user?.avatarUrl || DEFAULT_PROFILE_AVATAR_URL;
   const quickActions = [
     { href: "/machines/add", icon: Plus, label: "Add Machine" },
     { href: "/reports", icon: FileText, label: "Reports" },
@@ -378,7 +383,14 @@ export default function Navbar() {
             aria-haspopup="menu"
             className="flex items-center gap-2 rounded-xl border border-transparent px-2 py-1 text-cyan-300 transition-colors hover:border-cyan-400/20 hover:bg-cyan-400/10"
           >
-            <UserCircle size={32} />
+            <Image
+              src={profileAvatarUrl}
+              alt={`${displayName} profile`}
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-full border border-cyan-300/25 object-cover shadow-inner shadow-black/30"
+              priority
+            />
             <ChevronDown
               size={16}
               className={`transition-transform ${isProfileOpen ? "rotate-180" : ""}`}
@@ -390,11 +402,20 @@ export default function Navbar() {
               role="menu"
               className="premium-card absolute right-0 top-14 z-50 w-64 overflow-hidden rounded-xl"
             >
-              <div className="border-b border-slate-800 px-4 py-3">
-                <p className="truncate font-semibold text-white">{displayName}</p>
-                <p className="mt-0.5 truncate text-xs text-slate-400">
-                  {displayRole}
-                </p>
+              <div className="flex items-center gap-3 border-b border-slate-800 px-4 py-3">
+                <Image
+                  src={profileAvatarUrl}
+                  alt={`${displayName} profile`}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 shrink-0 rounded-full border border-cyan-300/20 object-cover shadow-inner shadow-black/30"
+                />
+                <div className="min-w-0">
+                  <p className="truncate font-semibold text-white">{displayName}</p>
+                  <p className="mt-0.5 truncate text-xs text-slate-400">
+                    {displayRole}
+                  </p>
+                </div>
               </div>
 
               <Link
