@@ -42,17 +42,17 @@ export default function MachinesPage() {
 
   return (
     <DashboardLayout>
-      <div className="page-stack space-y-6 text-white surface-enter">
-        <section className="premium-card rounded-2xl p-6">
+      <div className="page-stack space-y-4 text-white surface-enter">
+        <section className="premium-card rounded-2xl p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="page-eyebrow">
               Assets
             </p>
-            <h1 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">
+            <h1 className="mt-1.5 text-2xl font-black tracking-tight md:text-3xl">
               Machine Management
             </h1>
-            <p className="mt-2 text-sm text-slate-400">
+            <p className="mt-1.5 text-sm text-slate-400">
               Search, inspect, and monitor connected industrial machines.
             </p>
           </div>
@@ -60,7 +60,7 @@ export default function MachinesPage() {
           <button
             type="button"
             onClick={() => router.push("/machines/add")}
-            className="premium-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold"
+            className="premium-button inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold"
           >
             <Plus size={18} />
             Add Machine
@@ -68,7 +68,7 @@ export default function MachinesPage() {
           </div>
         </section>
 
-        <label className="premium-input flex items-center rounded-xl px-4 py-3">
+        <label className="premium-input flex items-center rounded-xl px-4 py-2.5">
           <Search size={18} className="text-slate-500" />
           <input
             type="text"
@@ -81,19 +81,19 @@ export default function MachinesPage() {
 
       <div className="premium-card overflow-x-auto rounded-2xl">
 
-        <table className="min-w-[980px] w-full text-sm">
+        <table className="w-full min-w-[1080px] text-sm">
 
           <thead className="bg-slate-950/70 text-xs uppercase tracking-[0.16em] text-slate-500">
             <tr>
-              <th className="text-left p-4">Machine ID</th>
-              <th className="text-left p-4">Machine</th>
-              <th className="text-left p-4">Department</th>
-              <th className="text-left p-4">Status</th>
-              <th className="text-left p-4">Health</th>
-              <th className="text-left p-4">Temperature</th>
-              <th className="text-left p-4">AI Risk</th>
-              <th className="text-left p-4">Maintenance</th>
-              <th className="text-left p-4">Actions</th>
+              <th className="w-[9%] p-3 text-left">Machine ID</th>
+              <th className="w-[17%] p-3 text-left">Machine</th>
+              <th className="w-[13%] p-3 text-left">Department</th>
+              <th className="w-[10%] p-3 text-left">Status</th>
+              <th className="w-[8%] p-3 text-left">Health</th>
+              <th className="w-[10%] p-3 text-left">Temperature</th>
+              <th className="w-[9%] p-3 text-left">AI Risk</th>
+              <th className="w-[14%] p-3 text-left">Maintenance</th>
+              <th className="w-[10%] p-3 text-left">Actions</th>
             </tr>
           </thead>
 
@@ -126,13 +126,13 @@ export default function MachinesPage() {
                   key={machine._id}
                   className="border-b border-slate-800/80 transition hover:bg-cyan-400/5"
                 >
-                  <td className="p-4">{machine.machineId}</td>
+                  <td className="p-3 font-semibold text-cyan-100">{machine.machineId}</td>
 
-                  <td className="p-4">{machine.name}</td>
+                  <td className="p-3 font-semibold">{machine.name}</td>
 
-                  <td className="p-4">{machine.department}</td>
+                  <td className="p-3 text-slate-300">{machine.department}</td>
 
-                  <td className="p-4">
+                  <td className="p-3">
                     <span
                       className={`status-pill ${
                         machine.status === "Running"
@@ -149,7 +149,7 @@ export default function MachinesPage() {
                   </td>
 
                   <td
-                    className={`p-4 font-bold ${
+                    className={`p-3 font-bold ${
                       machine.health >= 90
                         ? "text-green-400"
                         : machine.health >= 60
@@ -161,7 +161,7 @@ export default function MachinesPage() {
                   </td>
 
                   <td
-                    className={`p-4 font-bold ${
+                    className={`p-3 font-bold ${
                       Number(machine.temperature ?? 0) < 70
                         ? "text-green-400"
                         : Number(machine.temperature ?? 0) < 90
@@ -172,7 +172,7 @@ export default function MachinesPage() {
                     {Number(machine.temperature ?? 0).toFixed(1)} C
                   </td>
 
-                  <td className="p-4">
+                  <td className="p-3">
                     <span
                       className={`status-pill ${
                         machine.aiPrediction?.failureRisk === "High"
@@ -186,7 +186,7 @@ export default function MachinesPage() {
                     </span>
                   </td>
 
-                  <td className="p-4">
+                  <td className="p-3">
                     <div className="text-sm">
                       <div className="font-semibold">
                         {machine.aiPrediction?.maintenancePriority ?? "-"}
@@ -198,7 +198,7 @@ export default function MachinesPage() {
                     </div>
                   </td>
 
-                  <td className="p-4">
+                  <td className="p-3">
                     <Link
                       href={`/machines/${machine.machineId}`}
                       className="premium-button rounded-lg px-3 py-1.5 text-sm font-semibold"
@@ -215,8 +215,8 @@ export default function MachinesPage() {
 
       </div>
 
-      <section className="premium-card rounded-2xl p-5">
-        <h2 className="mb-4 text-2xl font-black">
+      <section className="premium-card rounded-2xl p-4">
+        <h2 className="mb-3 text-xl font-black">
           Digital Twin Factory
         </h2>
 

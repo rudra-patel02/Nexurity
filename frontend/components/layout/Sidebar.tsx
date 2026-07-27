@@ -88,15 +88,15 @@ export default function Sidebar() {
 
   return (
     <motion.aside
-      animate={{ width: isCollapsed ? 96 : 288 }}
+      animate={{ width: isCollapsed ? 88 : 264 }}
       transition={{ duration: 0.28, ease: "easeInOut" }}
       className="sticky top-0 z-20 hidden h-screen shrink-0 flex-col border-r border-cyan-400/10 bg-slate-950/72 shadow-2xl shadow-cyan-950/10 backdrop-blur-2xl lg:flex"
     >
 
-      <div className="border-b border-cyan-400/10 p-5">
+      <div className="border-b border-cyan-400/10 p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="mb-5 h-1 w-16 rounded-full bg-gradient-to-r from-cyan-300 via-emerald-300 to-violet-300 shadow-lg shadow-cyan-400/30" />
+            <div className="mb-4 h-1 w-14 rounded-full bg-gradient-to-r from-cyan-300 via-emerald-300 to-violet-300 shadow-lg shadow-cyan-400/30" />
             <AnimatePresence initial={false}>
               {!isCollapsed ? (
                 <motion.div
@@ -106,11 +106,11 @@ export default function Sidebar() {
                   exit={{ opacity: 0, x: -8 }}
                   transition={{ duration: 0.18 }}
                 >
-                  <h1 className="text-hologram text-3xl font-black tracking-[0.18em]">
+                  <h1 className="text-hologram text-2xl font-black tracking-[0.14em]">
                     Nexurity
                   </h1>
 
-                  <p className="mt-3 text-sm leading-5 text-slate-400">
+                  <p className="mt-2 text-xs leading-5 text-slate-400">
                     Industrial Decision Intelligence
                   </p>
                 </motion.div>
@@ -133,14 +133,14 @@ export default function Sidebar() {
             type="button"
             onClick={() => setIsCollapsed((current) => !current)}
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            className="rounded-xl border border-cyan-400/15 bg-cyan-400/10 p-2 text-cyan-200 transition-all hover:border-cyan-300/40 hover:bg-cyan-400/20"
+            className="rounded-lg border border-cyan-400/15 bg-cyan-400/10 p-2 text-cyan-200 transition-all hover:border-cyan-300/40 hover:bg-cyan-400/20"
           >
             {isCollapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
           </button>
         </div>
       </div>
 
-      <nav className="flex-1 space-y-7 overflow-y-auto p-4">
+      <nav className="flex-1 space-y-4 overflow-y-auto p-3">
 
         {groupedItems.map((group) => (
           <div key={group.label} className="space-y-2">
@@ -164,7 +164,7 @@ export default function Sidebar() {
                   href={item.href}
                   title={isCollapsed ? item.name : undefined}
                   aria-current={isActive ? "page" : undefined}
-                  className={`group relative flex items-center rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-300 ${
+                  className={`group relative flex items-center rounded-lg border px-3 py-2.5 text-[13px] font-semibold transition-all duration-300 ${
                     isCollapsed ? "justify-center" : "gap-4"
                   } ${
                     isActive
@@ -190,8 +190,8 @@ export default function Sidebar() {
 
       </nav>
 
-      <div className="border-t border-cyan-400/10 p-5 text-xs text-slate-500">
-        <div className="premium-tile rounded-lg px-4 py-3 text-center">
+      <div className="border-t border-cyan-400/10 p-4 text-xs text-slate-500">
+        <div className="premium-tile rounded-lg px-3 py-2.5 text-center">
           <p className="font-semibold text-slate-300">{isCollapsed ? "v1.0" : "Nexurity v1.0"}</p>
           {!isCollapsed ? <p className="mt-1">Enterprise AI Platform</p> : null}
         </div>

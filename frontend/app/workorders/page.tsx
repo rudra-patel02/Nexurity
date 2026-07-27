@@ -420,18 +420,18 @@ export default function WorkOrdersPage() {
 
   return (
     <DashboardLayout>
-      <div className="min-h-[calc(100vh-9rem)] space-y-6 text-white">
-        <section className="rounded-2xl border border-slate-800 bg-slate-900/75 p-6 shadow-2xl shadow-black/20">
-          <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
+      <div className="min-h-[calc(100vh-8rem)] space-y-4 text-white">
+        <section className="rounded-2xl border border-slate-800 bg-slate-900/75 p-5 shadow-2xl shadow-black/20">
+          <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
             <div>
               <div className="mb-3 flex items-center gap-3 text-sm font-semibold uppercase text-cyan-300">
                 <ClipboardList size={18} />
                 Maintenance Operations
               </div>
-              <h1 className="text-3xl font-bold text-white md:text-4xl">
+              <h1 className="text-2xl font-bold text-white md:text-3xl">
                 Work Orders
               </h1>
-              <p className="mt-2 max-w-3xl text-slate-400">
+              <p className="mt-1.5 max-w-3xl text-sm text-slate-400">
                 AI-triggered maintenance execution, assignment, status tracking,
                 and technician notes for monitored assets.
               </p>
@@ -488,7 +488,7 @@ export default function WorkOrdersPage() {
               key={view}
               type="button"
               onClick={() => setActiveView(view as WorkOrderView)}
-              className={`rounded-xl border px-4 py-2 text-sm font-semibold transition-colors ${
+              className={`rounded-xl border px-3.5 py-2 text-sm font-semibold transition-colors ${
                 activeView === view
                   ? "border-cyan-400/40 bg-cyan-500/15 text-cyan-100"
                   : "border-slate-800 bg-slate-900/75 text-slate-300 hover:border-cyan-400/30 hover:text-cyan-100"
@@ -747,17 +747,17 @@ export default function WorkOrdersPage() {
           ) : null}
 
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[980px] text-sm">
+            <table className="w-full min-w-[1040px] text-sm">
               <thead className="bg-slate-950/70 text-xs uppercase tracking-wide text-slate-400">
                 <tr>
-                  <th className="px-5 py-4 text-left">ID</th>
-                  <th className="px-5 py-4 text-left">Machine</th>
-                  <th className="px-5 py-4 text-left">Priority</th>
-                  <th className="px-5 py-4 text-left">Status</th>
-                  <th className="px-5 py-4 text-left">Engineer</th>
-                  <th className="px-5 py-4 text-left">Due Date</th>
-                  <th className="px-5 py-4 text-left">Downtime</th>
-                  <th className="px-5 py-4 text-left">Actions</th>
+                  <th className="w-[10%] px-3 py-3 text-left">ID</th>
+                  <th className="w-[22%] px-3 py-3 text-left">Machine</th>
+                  <th className="w-[10%] px-3 py-3 text-left">Priority</th>
+                  <th className="w-[13%] px-3 py-3 text-left">Status</th>
+                  <th className="w-[14%] px-3 py-3 text-left">Engineer</th>
+                  <th className="w-[12%] px-3 py-3 text-left">Due Date</th>
+                  <th className="w-[9%] px-3 py-3 text-left">Downtime</th>
+                  <th className="w-[10%] px-3 py-3 text-left">Actions</th>
                 </tr>
               </thead>
 
@@ -794,10 +794,10 @@ export default function WorkOrdersPage() {
                       key={workOrder.id}
                       className="border-t border-slate-800 transition-colors hover:bg-slate-800/50"
                     >
-                      <td className="px-5 py-4 font-semibold text-cyan-200">
+                      <td className="px-3 py-3 font-semibold text-cyan-200">
                         {workOrder.workOrderId}
                       </td>
-                      <td className="px-5 py-4">
+                      <td className="px-3 py-3">
                         <div className="font-semibold text-white">
                           {workOrder.machineName}
                         </div>
@@ -805,31 +805,31 @@ export default function WorkOrdersPage() {
                           {workOrder.machineId} - {workOrder.department}
                         </div>
                       </td>
-                      <td className="px-5 py-4">
+                      <td className="px-3 py-3">
                         <span
                           className={`rounded-full border px-3 py-1 text-xs font-bold ${priorityClasses[workOrder.priority]}`}
                         >
                           {workOrder.priority}
                         </span>
                       </td>
-                      <td className="px-5 py-4">
+                      <td className="px-3 py-3">
                         <span
                           className={`rounded-full border px-3 py-1 text-xs font-bold ${statusClasses[workOrder.status]}`}
                         >
                           {formatStatus(workOrder.status)}
                         </span>
                       </td>
-                      <td className="px-5 py-4 text-slate-300">
+                      <td className="px-3 py-3 text-slate-300">
                         {workOrder.assignedEngineer || "Unassigned"}
                       </td>
-                      <td className="px-5 py-4 text-slate-300">
+                      <td className="px-3 py-3 text-slate-300">
                         {formatDate(workOrder.scheduledDate || workOrder.dueDate)}
                       </td>
-                      <td className="px-5 py-4 text-slate-300">
+                      <td className="px-3 py-3 text-slate-300">
                         {workOrder.estimatedHours || workOrder.estimatedDowntimeHours} hrs
                       </td>
-                      <td className="px-5 py-4">
-                        <div className="flex flex-wrap gap-2">
+                      <td className="px-3 py-3">
+                        <div className="flex flex-nowrap gap-2">
                           <button
                             type="button"
                             onClick={() => void openWorkOrder(workOrder)}

@@ -1032,7 +1032,7 @@ html[data-theme="light"] .industrial-twin-vignette {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 96rem;
+  max-width: min(100%, 100rem);
   margin-inline: auto;
 }
 
@@ -1056,17 +1056,94 @@ html[data-theme="light"] .industrial-twin-vignette {
   font-weight: 800;
 }
 
+button,
+a {
+  min-width: 0;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+button.inline-flex,
+a.inline-flex,
+.premium-button {
+  flex-shrink: 0;
+}
+
+@media (min-width: 1280px) {
+  .status-pill {
+    gap: 0.32rem;
+    padding: 0.2rem 0.58rem;
+    font-size: 0.6875rem;
+  }
+}
+
 .surface-enter {
   animation: surface-enter 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 table {
+  width: 100%;
   border-spacing: 0;
+  table-layout: auto;
+}
+
+th {
+  white-space: nowrap;
+  overflow-wrap: normal;
+  letter-spacing: 0.08em;
+}
+
+td {
+  overflow-wrap: break-word;
+  vertical-align: middle;
 }
 
 td,
 th {
-  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+
+td :where(button, a),
+th :where(button, a) {
+  white-space: nowrap;
+}
+
+td :where(.status-pill, span[class*="rounded-full"]),
+th :where(.status-pill, span[class*="rounded-full"]) {
+  white-space: nowrap;
+}
+
+td :where(p, div) {
+  min-width: 0;
+}
+
+.overflow-x-auto {
+  overscroll-behavior-x: contain;
+}
+
+@media (min-width: 1280px) {
+  .page-stack {
+    max-width: min(100%, 100rem);
+  }
+
+  .premium-card,
+  .holographic-panel {
+    border-radius: 1rem;
+  }
+
+  table {
+    font-size: 0.8125rem;
+  }
+
+  th {
+    font-size: 0.6875rem;
+  }
 }
 
 svg,

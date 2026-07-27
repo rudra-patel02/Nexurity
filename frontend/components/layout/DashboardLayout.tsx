@@ -91,10 +91,10 @@ export default function DashboardLayout({ allowedRoles, children }: Props) {
       <div className="pointer-events-none fixed bottom-0 left-0 z-0 h-px w-full bg-gradient-to-r from-emerald-300/20 via-transparent to-cyan-300/20" />
       <Sidebar />
 
-      <div className="relative z-10 min-w-0 flex-1">
+      <div className="relative z-10 flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
         <Navbar />
 
-        <main className="p-4 sm:p-6 lg:p-8 xl:p-10">
+        <main className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 sm:px-5 lg:px-6 xl:px-7">
           {children}
         </main>
       </div>

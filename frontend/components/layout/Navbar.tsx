@@ -213,12 +213,12 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="glass-nav sticky top-0 z-40 px-4 py-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+    <header className="glass-nav z-40 shrink-0 px-4 py-3 sm:px-5 lg:px-6 xl:px-7">
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
 
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300/80">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-cyan-300/80">
             Command Workspace
           </p>
           <span className="hidden h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-lg shadow-emerald-300/40 sm:inline-block" />
@@ -226,11 +226,11 @@ export default function Navbar() {
             Live Ops
           </span>
         </div>
-        <h2 className="mt-1 truncate text-xl font-black text-white sm:text-2xl">
+        <h2 className="mt-0.5 truncate text-xl font-black text-white">
           {breadcrumbs.at(-1)}
         </h2>
 
-        <div className="mt-1 flex min-w-0 items-center gap-2 truncate text-sm text-slate-400">
+        <div className="mt-0.5 flex min-w-0 items-center gap-2 truncate text-xs text-slate-400">
           {breadcrumbs.map((breadcrumb, index) => (
             <span key={`${breadcrumb}-${index}`} className="flex min-w-0 items-center gap-2">
               {index > 0 ? <span className="text-slate-600">/</span> : null}
@@ -242,10 +242,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-end gap-3 sm:gap-4">
+      <div className="flex flex-wrap items-center justify-end gap-2.5 sm:gap-3">
 
         <div ref={searchRef} className="relative order-last w-full sm:order-none sm:w-auto">
-          <div className="premium-tile flex items-center rounded-xl px-4 py-2 shadow-inner shadow-black/20 transition-colors focus-within:border-cyan-300/50">
+          <div className="premium-tile flex items-center rounded-xl px-3 py-2 shadow-inner shadow-black/20 transition-colors focus-within:border-cyan-300/50">
 
             {isSearching ? (
               <Loader2 size={18} className="animate-spin text-cyan-300" />
@@ -259,7 +259,7 @@ export default function Navbar() {
               onFocus={() => setIsSearchFocused(true)}
               onChange={(event) => handleQueryChange(event.target.value)}
               placeholder="Command palette"
-              className="ml-3 min-w-0 flex-1 bg-transparent text-white outline-none placeholder:text-slate-500 sm:w-72"
+              className="ml-2.5 min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500 sm:w-64 2xl:w-72"
             />
 
             {query ? (
@@ -365,7 +365,7 @@ export default function Navbar() {
         <ThemeModeControl compact />
 
         {user?.activePlantId ? (
-          <div className="hidden rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-3 py-2 text-sm text-slate-300 shadow-inner shadow-cyan-300/5 xl:block">
+          <div className="hidden rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-3 py-2 text-xs text-slate-300 shadow-inner shadow-cyan-300/5 xl:block">
             Plant: <span className="font-semibold text-cyan-200">{user.activePlantId}</span>
           </div>
         ) : null}
@@ -378,7 +378,7 @@ export default function Navbar() {
             aria-haspopup="menu"
             className="flex items-center gap-2 rounded-xl border border-transparent px-2 py-1 text-cyan-300 transition-colors hover:border-cyan-400/20 hover:bg-cyan-400/10"
           >
-            <UserCircle size={36} />
+            <UserCircle size={32} />
             <ChevronDown
               size={16}
               className={`transition-transform ${isProfileOpen ? "rotate-180" : ""}`}
