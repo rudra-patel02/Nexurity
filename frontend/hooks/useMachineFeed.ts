@@ -9,16 +9,58 @@ let machinesSnapshot: MachineData[] = [];
 let hasLoadedSnapshot = false;
 let loadPromise: Promise<void> | null = null;
 let socketSubscribed = false;
+let lastSnapshotSignature = "";
+let emitFrame: number | null = null;
 const listeners = new Set<() => void>();
 
 const emitChange = () => {
   listeners.forEach((listener) => listener());
 };
 
+const scheduleEmitChange = () => {
+  if (typeof window === "undefined") {
+    emitChange();
+    return;
+  }
+
+  if (emitFrame !== null) {
+    return;
+  }
+
+  emitFrame = window.requestAnimationFrame(() => {
+    emitFrame = null;
+    emitChange();
+  });
+};
+
+const getMachineSignature = (machine: MachineData) =>
+  [
+    machine._id,
+    machine.machineId,
+    machine.status,
+    machine.health,
+    machine.temperature,
+    machine.power,
+    machine.lastSeen,
+    machine.lastHeartbeat,
+    machine.lastLiveTelemetryAt,
+  ].join(":");
+
+const getSnapshotSignature = (machines: MachineData[]) =>
+  `${machines.length}|${machines.map(getMachineSignature).join("|")}`;
+
 const setMachinesSnapshot = (nextMachines: MachineData[]) => {
+  const nextSignature = getSnapshotSignature(nextMachines);
+
+  if (nextSignature === lastSnapshotSignature) {
+    hasLoadedSnapshot = true;
+    return;
+  }
+
   machinesSnapshot = nextMachines;
+  lastSnapshotSignature = nextSignature;
   hasLoadedSnapshot = true;
-  emitChange();
+  scheduleEmitChange();
 };
 
 const loadMachines = (force = false) => {
@@ -58,6 +100,11 @@ const subscribe = (listener: () => void) => {
     if (listeners.size === 0 && socketSubscribed) {
       socket.off("machineUpdate", handleMachineUpdate);
       socketSubscribed = false;
+    }
+
+    if (listeners.size === 0 && emitFrame !== null) {
+      window.cancelAnimationFrame(emitFrame);
+      emitFrame = null;
     }
   };
 };

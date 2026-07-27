@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
-import { useMemo, useRef, useState } from "react";
+import { memo, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 import Ground from "./Ground";
@@ -267,7 +267,7 @@ const SensorOverlay = ({ machine }: { machine: MachineType }) => {
   );
 };
 
-export default function FactoryScene({
+function FactoryScene({
   profiles = [],
   machineData = [],
   selectedMachineId,
@@ -508,3 +508,5 @@ export default function FactoryScene({
     </div>
   );
 }
+
+export default memo(FactoryScene);

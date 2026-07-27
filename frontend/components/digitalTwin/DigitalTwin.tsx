@@ -12,11 +12,11 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import FactoryScene from "@/components/3d/FactoryScene";
 import { useEnterpriseTelemetry } from "@/hooks/useEnterpriseTelemetry";
 
-export default function DigitalTwin() {
+function DigitalTwin() {
   const { profiles, kpis, enhancedAlerts } = useEnterpriseTelemetry();
   const [selectedMachineId, setSelectedMachineId] = useState<string | null>(null);
   const [playbackWindow, setPlaybackWindow] = useState<15 | 60 | 1440>(15);
@@ -82,11 +82,20 @@ export default function DigitalTwin() {
       null,
     [playbackProfiles, selectedMachineId]
   );
-  const twinMetrics = [
-    { icon: Radar, label: "Telemetry", value: profiles.length ? "Live" : "Demo", tone: "text-emerald-300" },
-    { icon: Layers3, label: "Assets", value: String(kpis.totalMachines || profiles.length || 4), tone: "text-cyan-300" },
-    { icon: Zap, label: "Alarms", value: String(enhancedAlerts.length), tone: "text-amber-300" },
-  ];
+  const handleMachineSelect = useCallback(
+    (profile: { machine: { machineId: string } }) => {
+      setSelectedMachineId(profile.machine.machineId);
+    },
+    []
+  );
+  const twinMetrics = useMemo(
+    () => [
+      { icon: Radar, label: "Telemetry", value: profiles.length ? "Live" : "Demo", tone: "text-emerald-300" },
+      { icon: Layers3, label: "Assets", value: String(kpis.totalMachines || profiles.length || 4), tone: "text-cyan-300" },
+      { icon: Zap, label: "Alarms", value: String(enhancedAlerts.length), tone: "text-amber-300" },
+    ],
+    [enhancedAlerts.length, kpis.totalMachines, profiles.length]
+  );
 
   useEffect(() => {
     if (!isPlaybackPlaying) {
@@ -254,9 +263,10 @@ export default function DigitalTwin() {
           <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(15,23,42,0.28),transparent_38%,rgba(8,145,178,0.08))]" />
           <div className="relative h-full">
             <FactoryScene
+              animated={isPlaybackPlaying}
               profiles={playbackProfiles}
               selectedMachineId={selectedMachineId}
-              onMachineSelect={(profile) => setSelectedMachineId(profile.machine.machineId)}
+              onMachineSelect={handleMachineSelect}
               showSensorOverlays={false}
             />
           </div>
@@ -304,3 +314,5 @@ export default function DigitalTwin() {
     </motion.section>
   );
 }
+
+export default DigitalTwin;

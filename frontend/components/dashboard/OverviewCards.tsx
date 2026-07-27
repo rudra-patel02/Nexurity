@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   Activity,
@@ -12,94 +12,100 @@ import {
 } from "lucide-react";
 import { useMachineFeed } from "@/hooks/useMachineFeed";
 
-export default function OverviewCards() {
+function OverviewCards() {
   const machines = useMachineFeed();
 
-  const totalMachines = machines.length;
+  const metrics = useMemo(() => {
+    const totalMachines = machines.length;
+    let healthTotal = 0;
+    let temperatureTotal = 0;
+    let powerTotal = 0;
+    let criticalAlerts = 0;
 
-  const avgHealth =
-    machines.length > 0
-      ? (
-          machines.reduce((sum, machine) => sum + (machine.health || 0), 0) /
-          machines.length
-        ).toFixed(1)
-      : "0";
+    machines.forEach((machine) => {
+      healthTotal += machine.health || 0;
+      temperatureTotal += machine.temperature || 0;
+      powerTotal += machine.power || 0;
 
-  const avgTemperature =
-    machines.length > 0
-      ? (
-          machines.reduce(
-            (sum, machine) => sum + (machine.temperature || 0),
-            0
-          ) / machines.length
-        ).toFixed(1)
-      : "0";
+      if (machine.status === "Critical") {
+        criticalAlerts += 1;
+      }
+    });
 
-  const criticalAlerts = machines.filter(
-    (machine) => machine.status === "Critical"
-  ).length;
+    const avgHealth =
+      totalMachines > 0 ? (healthTotal / totalMachines).toFixed(1) : "0";
+    const avgTemperature =
+      totalMachines > 0 ? (temperatureTotal / totalMachines).toFixed(1) : "0";
+    const energy = totalMachines > 0 ? powerTotal.toFixed(0) : "0";
+    const avgHealthNumber = Number(avgHealth);
+    const avgTemperatureNumber = Number(avgTemperature);
+    const energyNumber = Number(energy);
+    const criticalRatio =
+      totalMachines > 0 ? Math.min((criticalAlerts / totalMachines) * 100, 100) : 0;
 
-  const energy =
-    machines.length > 0
-      ? machines.reduce((sum, machine) => sum + (machine.power || 0), 0).toFixed(0)
-      : "0";
-
-  const avgHealthNumber = Number(avgHealth);
-  const avgTemperatureNumber = Number(avgTemperature);
-  const energyNumber = Number(energy);
-  const criticalRatio =
-    totalMachines > 0 ? Math.min((criticalAlerts / totalMachines) * 100, 100) : 0;
+    return {
+      avgHealth,
+      avgHealthNumber,
+      avgTemperature,
+      avgTemperatureNumber,
+      criticalAlerts,
+      criticalRatio,
+      energy,
+      energyNumber,
+      totalMachines,
+    };
+  }, [machines]);
 
   const cards = useMemo(() => [
     {
       accent: "from-cyan-300 to-blue-400",
       color: "text-cyan-300",
       icon: Cpu,
-      progress: Math.min(totalMachines * 8, 100),
+      progress: Math.min(metrics.totalMachines * 8, 100),
       sparkline: [42, 48, 54, 62, 68, 74],
       title: "Machines",
-      trend: totalMachines > 0 ? "Fleet online" : "Awaiting assets",
-      value: totalMachines,
+      trend: metrics.totalMachines > 0 ? "Fleet online" : "Awaiting assets",
+      value: metrics.totalMachines,
     },
     {
       accent: "from-emerald-300 to-green-500",
       color: "text-emerald-300",
       icon: Activity,
-      progress: avgHealthNumber,
-      sparkline: [74, 78, 82, 81, 86, Math.max(avgHealthNumber, 12)],
+      progress: metrics.avgHealthNumber,
+      sparkline: [74, 78, 82, 81, 86, Math.max(metrics.avgHealthNumber, 12)],
       title: "Plant Health",
-      trend: avgHealthNumber >= 80 ? "Stable operating band" : "Needs attention",
-      value: `${avgHealth}%`,
+      trend: metrics.avgHealthNumber >= 80 ? "Stable operating band" : "Needs attention",
+      value: `${metrics.avgHealth}%`,
     },
     {
       accent: "from-red-300 to-rose-500",
       color: "text-rose-300",
       icon: AlertTriangle,
-      progress: criticalRatio,
-      sparkline: [18, 14, 19, 12, 8, Math.max(criticalRatio, 5)],
+      progress: metrics.criticalRatio,
+      sparkline: [18, 14, 19, 12, 8, Math.max(metrics.criticalRatio, 5)],
       title: "Critical Alerts",
-      trend: criticalAlerts === 0 ? "No critical faults" : "Escalation queue",
-      value: criticalAlerts,
+      trend: metrics.criticalAlerts === 0 ? "No critical faults" : "Escalation queue",
+      value: metrics.criticalAlerts,
     },
     {
       accent: "from-amber-200 to-yellow-500",
       color: "text-amber-300",
       icon: Zap,
-      progress: Math.min(energyNumber / 10, 100),
-      sparkline: [34, 46, 42, 58, 51, Math.min(Math.max(energyNumber / 8, 18), 96)],
+      progress: Math.min(metrics.energyNumber / 10, 100),
+      sparkline: [34, 46, 42, 58, 51, Math.min(Math.max(metrics.energyNumber / 8, 18), 96)],
       title: "Energy",
       trend: "Load distribution",
-      value: `${energy} kW`,
+      value: `${metrics.energy} kW`,
     },
     {
       accent: "from-orange-300 to-red-400",
       color: "text-orange-300",
       icon: Thermometer,
-      progress: Math.min(avgTemperatureNumber * 1.4, 100),
-      sparkline: [38, 42, 45, 47, 44, Math.min(Math.max(avgTemperatureNumber, 16), 92)],
+      progress: Math.min(metrics.avgTemperatureNumber * 1.4, 100),
+      sparkline: [38, 42, 45, 47, 44, Math.min(Math.max(metrics.avgTemperatureNumber, 16), 92)],
       title: "Avg Temp",
-      trend: avgTemperatureNumber > 70 ? "Thermal watch" : "Normal thermal range",
-      value: `${avgTemperature} C`,
+      trend: metrics.avgTemperatureNumber > 70 ? "Thermal watch" : "Normal thermal range",
+      value: `${metrics.avgTemperature} C`,
     },
     {
       accent: "from-violet-300 to-fuchsia-500",
@@ -111,7 +117,7 @@ export default function OverviewCards() {
       trend: "Model assurance",
       value: "96%",
     },
-  ], [avgHealth, avgHealthNumber, avgTemperature, avgTemperatureNumber, criticalAlerts, criticalRatio, energy, energyNumber, totalMachines]);
+  ], [metrics]);
 
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -180,3 +186,5 @@ export default function OverviewCards() {
     </div>
   );
 }
+
+export default memo(OverviewCards);

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Cpu, RadioTower, ShieldCheck, Sparkles } from "lucide-react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import DeferredSection from "@/components/layout/DeferredSection";
 
 import AIDecisionCenterCard from "@/components/dashboard/AIDecisionCenterCard";
 import OverviewCards from "@/components/dashboard/OverviewCards";
@@ -125,20 +126,32 @@ export default function Home() {
         <OverviewCards />
 
         {/* AI Command Center */}
-        <AICommandCenter />
-        <AICopilot />
-        <LiveSensors />
-        <ProductionAnalytics />
+        <DeferredSection fallback={<DashboardSectionSkeleton height="h-72" />}>
+          <AICommandCenter />
+        </DeferredSection>
+        <DeferredSection fallback={<DashboardSectionSkeleton height="h-80" />}>
+          <AICopilot />
+        </DeferredSection>
+        <DeferredSection fallback={<DashboardSectionSkeleton height="h-80" />}>
+          <LiveSensors />
+        </DeferredSection>
+        <DeferredSection fallback={<DashboardSectionSkeleton height="h-80" />}>
+          <ProductionAnalytics />
+        </DeferredSection>
 
         {/* Digital Twin + Plant Status */}
         <div className="grid grid-cols-12 gap-6">
 
           <div className="col-span-12 xl:col-span-8">
-            <DigitalTwin />
+            <DeferredSection fallback={<DashboardSectionSkeleton height="h-[560px]" />}>
+              <DigitalTwin />
+            </DeferredSection>
           </div>
 
           <div className="col-span-12 xl:col-span-4">
-            <PlantStatus />
+            <DeferredSection fallback={<DashboardSectionSkeleton height="h-[560px]" />}>
+              <PlantStatus />
+            </DeferredSection>
           </div>
 
         </div>
@@ -147,19 +160,27 @@ export default function Home() {
         <div className="grid grid-cols-12 gap-6">
 
           <div className="col-span-12 xl:col-span-6">
-            <AnalyticsCharts />
+            <DeferredSection fallback={<DashboardSectionSkeleton />}>
+              <AnalyticsCharts />
+            </DeferredSection>
           </div>
 
           <div className="col-span-12 xl:col-span-6">
-            <MachineHealthChart />
+            <DeferredSection fallback={<DashboardSectionSkeleton />}>
+              <MachineHealthChart />
+            </DeferredSection>
           </div>
 
           <div className="col-span-12 xl:col-span-6">
-            <EnergyChart />
+            <DeferredSection fallback={<DashboardSectionSkeleton />}>
+              <EnergyChart />
+            </DeferredSection>
           </div>
 
           <div className="col-span-12 xl:col-span-6">
-            <MachineStatusChart />
+            <DeferredSection fallback={<DashboardSectionSkeleton />}>
+              <MachineStatusChart />
+            </DeferredSection>
           </div>
 
         </div>
@@ -168,18 +189,24 @@ export default function Home() {
         <div className="grid grid-cols-12 gap-6">
 
           <div className="col-span-12 xl:col-span-8">
-            <AIInsights />
+            <DeferredSection fallback={<DashboardSectionSkeleton height="h-96" />}>
+              <AIInsights />
+            </DeferredSection>
           </div>
 
           <div className="col-span-12 xl:col-span-4">
-            <LiveAlerts />
+            <DeferredSection fallback={<DashboardSectionSkeleton height="h-96" />}>
+              <LiveAlerts />
+            </DeferredSection>
           </div>
 
         </div>
         <div className="grid grid-cols-12 gap-6">
 
           <div className="col-span-12">
-            <OEEGauge />
+            <DeferredSection fallback={<DashboardSectionSkeleton />}>
+              <OEEGauge />
+            </DeferredSection>
           </div>
 
         </div>
@@ -188,7 +215,9 @@ export default function Home() {
         <div className="grid grid-cols-12 gap-6">
 
           <div className="col-span-12">
-            <Scene />
+            <DeferredSection fallback={<DashboardSectionSkeleton height="h-[520px]" />}>
+              <Scene />
+            </DeferredSection>
           </div>
 
         </div>
