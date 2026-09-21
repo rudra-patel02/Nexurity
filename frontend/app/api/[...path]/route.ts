@@ -1,9 +1,14 @@
 import { NextRequest } from "next/server";
 
+const DEFAULT_BACKEND_ORIGIN =
+  process.env.NODE_ENV === "production"
+    ? "https://nexurity-backend.onrender.com"
+    : "http://localhost:5000";
+
 const BACKEND_ORIGIN =
   process.env.API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://nexurity-backend.onrender.com";
+  DEFAULT_BACKEND_ORIGIN;
 
 const trimTrailingSlash = (value: string) => value.trim().replace(/\/+$/, "");
 const backendBaseUrl = trimTrailingSlash(BACKEND_ORIGIN).replace(/\/api$/i, "");
