@@ -67,13 +67,27 @@ const proxyRequest = async (
   const { path = [] } = await context.params;
   const method = request.method.toUpperCase();
   const hasBody = !["GET", "HEAD"].includes(method);
-  const response = await fetch(buildBackendUrl(request, path), {
-    body: hasBody ? await request.arrayBuffer() : undefined,
-    cache: "no-store",
-    headers: buildForwardHeaders(request),
-    method,
-    redirect: "manual",
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(buildBackendUrl(request, path), {
+      body: hasBody ? await request.arrayBuffer() : undefined,
+      cache: "no-store",
+      headers: buildForwardHeaders(request),
+      method,
+      redirect: "manual",
+    });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error";
+
+    return Response.json(
+      {
+        message: "Backend API unavailable",
+        detail: message,
+      },
+      { status: 502 }
+    );
+  }
 
   return new Response(response.body, {
     headers: buildResponseHeaders(response.headers),

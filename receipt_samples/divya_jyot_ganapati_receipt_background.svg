@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2480" height="1169" viewBox="0 0 2480 1169" role="img" aria-labelledby="title desc">
+  <title id="title">Divya Jyot Yuvak Mandal Ganapati Donation Receipt</title>
+  <desc id="desc">A simple black and white one-third A4 Ganapati donation receipt format with a soft photo watermark and printable fields.</desc>
+  <defs>
+    <clipPath id="photoOval">
+      <ellipse cx="1240" cy="615" rx="330" ry="420"/>
+    </clipPath>
+    <pattern id="dotGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="2.4" fill="#000" opacity="0.035"/>
+    </pattern>
+    <filter id="grayscale">
+      <feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0"/>
+    </filter>
+    <style>
+      .serif { font-family: Georgia, "Times New Roman", serif; }
+      .sans { font-family: Arial, Helvetica, sans-serif; }
+      .field { stroke: #111; stroke-width: 3; stroke-dasharray: 18 16; opacity: 0.55; }
+      .ornament { fill: none; stroke: #111; stroke-linecap: round; stroke-linejoin: round; opacity: 0.55; }
+    </style>
+  </defs>
+
+  <rect width="2480" height="1169" fill="#fff"/>
+  <rect width="2480" height="1169" fill="url(#dotGrid)"/>
+
+  <rect x="58" y="58" width="2364" height="1053" rx="28" fill="none" stroke="#111" stroke-width="18"/>
+  <rect x="96" y="96" width="2288" height="977" rx="20" fill="none" stroke="#111" stroke-width="5"/>
+  <rect x="128" y="128" width="2224" height="913" rx="14" fill="none" stroke="#111" stroke-width="2" opacity="0.45"/>
+
+  <g class="ornament" stroke-width="5">
+    <path d="M230 200 C430 112 620 112 820 200"/>
+    <path d="M1660 200 C1860 112 2050 112 2250 200"/>
+    <path d="M230 198 C305 273 408 294 525 274 C642 294 745 273 820 198" stroke-width="3"/>
+    <path d="M1660 198 C1735 273 1838 294 1955 274 C2072 294 2175 273 2250 198" stroke-width="3"/>
+  </g>
+
+  <g clip-path="url(#photoOval)" opacity="0.14" filter="url(#grayscale)">
+    <image href="ganapati_background_photo.jpeg" x="910" y="190" width="660" height="850" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <ellipse cx="1240" cy="615" rx="330" ry="420" fill="none" stroke="#111" stroke-width="3" opacity="0.12"/>
+
+  <g>
+    <text x="1240" y="165" text-anchor="middle" class="serif" font-size="38" fill="#111" letter-spacing="2">|| Shree Ganeshaya Namah ||</text>
+    <text x="1240" y="258" text-anchor="middle" class="serif" font-size="82" font-weight="700" fill="#111">Divya Jyot Yuvak Mandal</text>
+    <line x1="610" y1="300" x2="1870" y2="300" stroke="#111" stroke-width="6" stroke-linecap="round"/>
+    <text x="1240" y="368" text-anchor="middle" class="sans" font-size="43" font-weight="700" fill="#111" letter-spacing="6">GANAPATI DONATION RECEIPT</text>
+  </g>
+
+  <g class="sans" font-size="39" fill="#111">
+    <text x="245" y="510">Receipt No.</text>
+    <line x1="500" y1="523" x2="900" y2="523" class="field"/>
+    <text x="1590" y="510">Date</text>
+    <line x1="1725" y1="523" x2="2195" y2="523" class="field"/>
+    <text x="245" y="665">Received with thanks from</text>
+    <line x1="835" y1="678" x2="2195" y2="678" class="field"/>
+    <text x="245" y="825">Amount</text>
+    <line x1="455" y1="838" x2="1110" y2="838" class="field"/>
+    <text x="1240" y="825">Payment Mode</text>
+    <line x1="1600" y1="838" x2="2195" y2="838" class="field"/>
+  </g>
+
+  <g opacity="0.70">
+    <path d="M230 965 C430 895 615 895 815 965" class="ornament" stroke-width="5"/>
+    <path d="M1665 965 C1865 895 2050 895 2250 965" class="ornament" stroke-width="5"/>
+    <text x="1240" y="986" text-anchor="middle" class="serif" font-size="38" fill="#111">Ganapati Utsav Donation</text>
+    <text x="1240" y="1040" text-anchor="middle" class="sans" font-size="26" fill="#111" opacity="0.75">Thank you for your generous contribution</text>
+  </g>
+
+  <g fill="#111" opacity="0.55">
+    <circle cx="205" cy="205" r="14"/>
+    <circle cx="2275" cy="205" r="14"/>
+    <circle cx="205" cy="964" r="14"/>
+    <circle cx="2275" cy="964" r="14"/>
+  </g>
+</svg>
