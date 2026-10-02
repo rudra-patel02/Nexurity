@@ -19,6 +19,8 @@ const reportRoles = [
   "Maintenance Manager",
   "Engineer",
   "Maintenance Engineer",
+  "Organization Admin",
+  "Quality Engineer",
   "Operator",
   "Viewer",
 ];

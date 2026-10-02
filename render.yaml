@@ -1,5 +1,24 @@
 services:
   - type: web
+    name: nexurity-frontend
+    runtime: node
+    rootDir: frontend
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_API_URL
+        value: ""
+      - key: NEXT_PUBLIC_SOCKET_URL
+        value: https://nexurity-backend.onrender.com
+      - key: API_URL
+        value: https://nexurity-backend.onrender.com
+      - key: NEXT_PUBLIC_VAPID_PUBLIC_KEY
+        sync: false
+
+  - type: web
     name: nexurity-backend
     runtime: node
     rootDir: backend
@@ -25,11 +44,11 @@ services:
       - key: JWT_REFRESH_SECRET
         sync: false
       - key: CORS_ORIGIN
-        sync: false
+        value: https://nexurity-frontend.onrender.com
       - key: CORS_CREDENTIALS
         value: "true"
       - key: PUBLIC_API_BASE_URL
-        sync: false
+        value: https://nexurity-backend.onrender.com
       - key: MONGO_CONNECT_ATTEMPTS
         value: "5"
       - key: MONGO_CONNECT_RETRY_MS

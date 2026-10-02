@@ -1,10 +1,16 @@
 import Machine from "../models/machine.js";
 import Notification from "../models/notification.js";
 import WorkOrder from "../models/workOrder.js";
+import { buildTenantScopedQuery } from "../middleware/tenantMiddleware.js";
 import { buildExecutiveDashboard } from "../services/executiveAnalyticsService.js";
 
 export const getExecutiveDashboard = async (req, res) => {
   try {
+    const scopedQuery = buildTenantScopedQuery(req);
+    const scopedMatch = Object.keys(scopedQuery).length > 0
+      ? [{ $match: scopedQuery }]
+      : [];
+
     const [
       machines,
       notifications,
@@ -15,10 +21,11 @@ export const getExecutiveDashboard = async (req, res) => {
       notificationSummary,
       workOrderSummary,
     ] = await Promise.all([
-      Machine.find().sort({ machineId: 1 }).lean(),
-      Notification.find().sort({ createdAt: -1 }).limit(500).lean(),
-      WorkOrder.find().sort({ createdAt: -1 }).limit(500).lean(),
+      Machine.find(scopedQuery).sort({ machineId: 1 }).lean(),
+      Notification.find(scopedQuery).sort({ createdAt: -1 }).limit(500).lean(),
+      WorkOrder.find(scopedQuery).sort({ createdAt: -1 }).limit(500).lean(),
       Machine.aggregate([
+        ...scopedMatch,
         {
           $group: {
             _id: null,
@@ -30,6 +37,7 @@ export const getExecutiveDashboard = async (req, res) => {
         },
       ]),
       Machine.aggregate([
+        ...scopedMatch,
         {
           $group: {
             _id: "$department",
@@ -42,6 +50,7 @@ export const getExecutiveDashboard = async (req, res) => {
         { $sort: { totalEnergy: -1 } },
       ]),
       Machine.aggregate([
+        ...scopedMatch,
         {
           $group: {
             _id: "$status",
@@ -50,6 +59,7 @@ export const getExecutiveDashboard = async (req, res) => {
         },
       ]),
       Notification.aggregate([
+        ...scopedMatch,
         {
           $group: {
             _id: "$severity",
@@ -63,6 +73,7 @@ export const getExecutiveDashboard = async (req, res) => {
         },
       ]),
       WorkOrder.aggregate([
+        ...scopedMatch,
         {
           $group: {
             _id: "$status",

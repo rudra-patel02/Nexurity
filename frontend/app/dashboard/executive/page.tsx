@@ -276,7 +276,9 @@ export default function ExecutiveDashboardPage() {
   };
 
   return (
-    <DashboardLayout>
+    <DashboardLayout
+      allowedRoles={["Super Admin", "Admin", "Plant Admin", "Plant Manager"]}
+    >
       <div className="min-h-[calc(100vh-9rem)] space-y-6 text-white">
         <section className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>

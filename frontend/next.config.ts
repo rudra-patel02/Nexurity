@@ -25,9 +25,28 @@ const enforceHttps = (value: string) => {
     return trimTrailingSlash(trimmed);
   }
 };
-const publicApiUrl = enforceHttps(process.env.NEXT_PUBLIC_API_URL || "");
+
+const isLocalhostOrigin = (value: string) => {
+  try {
+    const { hostname } = new URL(value);
+    return ["localhost", "127.0.0.1", "0.0.0.0", "::1"].includes(hostname);
+  } catch {
+    return false;
+  }
+};
+
+const productionSafeOrigin = (value: string) =>
+  process.env.NODE_ENV === "production" && isLocalhostOrigin(value)
+    ? ""
+    : value;
+
+const publicApiUrl = enforceHttps(
+  productionSafeOrigin(process.env.NEXT_PUBLIC_API_URL || "")
+);
 const publicSocketUrl = enforceHttps(
-  process.env.NEXT_PUBLIC_SOCKET_URL || publicApiUrl || productionBackendOrigin
+  productionSafeOrigin(process.env.NEXT_PUBLIC_SOCKET_URL || "") ||
+    publicApiUrl ||
+    productionBackendOrigin
 );
 
 const nextConfig: NextConfig = {

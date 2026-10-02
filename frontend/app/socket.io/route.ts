@@ -1,10 +1,39 @@
 import { NextRequest } from "next/server";
 
+const DEFAULT_BACKEND_ORIGIN =
+  process.env.NODE_ENV === "production"
+    ? "https://nexurity-backend.onrender.com"
+    : "http://localhost:5000";
+
+const isLocalhostOrigin = (value: string) => {
+  try {
+    const { hostname } = new URL(value);
+    return ["localhost", "127.0.0.1", "0.0.0.0", "::1"].includes(hostname);
+  } catch {
+    return false;
+  }
+};
+
+const getBackendOrigin = () => {
+  const configuredOrigin =
+    process.env.API_URL ||
+    process.env.NEXT_PUBLIC_SOCKET_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "";
+
+  if (
+    process.env.NODE_ENV === "production" &&
+    configuredOrigin &&
+    isLocalhostOrigin(configuredOrigin)
+  ) {
+    return DEFAULT_BACKEND_ORIGIN;
+  }
+
+  return configuredOrigin || DEFAULT_BACKEND_ORIGIN;
+};
+
 const BACKEND_ORIGIN =
-  process.env.API_URL ||
-  process.env.NEXT_PUBLIC_SOCKET_URL ||
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://nexurity-backend.onrender.com";
+  getBackendOrigin();
 
 const backendBaseUrl = BACKEND_ORIGIN.trim().replace(/\/+$/, "").replace(/\/api$/i, "");
 
