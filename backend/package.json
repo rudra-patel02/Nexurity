@@ -12,6 +12,7 @@
     "start": "node src/index.js",
     "seed": "node src/seed.js",
     "seed:admin": "node src/seedAdmin.js",
+    "reset:admin": "node src/resetAdminPassword.js",
     "test": "node --test"
   },
   "dependencies": {
