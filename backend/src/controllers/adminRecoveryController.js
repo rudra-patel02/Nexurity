@@ -60,6 +60,70 @@ export const getAdminRecoveryStatus = async (req, res) => {
   });
 };
 
+export const buildInitialAdminAccountPayload = (passwordHash) => ({
+  name: "Nexurity Admin",
+  email: ADMIN_EMAIL,
+  password: passwordHash,
+  role: "Super Admin",
+  department: "Administration",
+  status: "Active",
+  tenantId: "",
+  organizationId: "",
+  plantIds: [],
+  activePlantId: "",
+  refreshToken: "",
+});
+
+export const createInitialAdminAccount = async (req, res) => {
+  if (!authorizeRecoveryRequest(req, res)) {
+    return;
+  }
+
+  const email = String(req.body?.email || "").trim().toLowerCase();
+  const password = String(req.body?.password || "");
+
+  if (email !== ADMIN_EMAIL || password.length < 12) {
+    return res.status(400).json({
+      success: false,
+      message: "The admin email and a password of at least 12 characters are required",
+    });
+  }
+
+  const existingUser = await User.exists({ email: ADMIN_EMAIL });
+
+  if (existingUser) {
+    return res.status(409).json({
+      success: false,
+      message: "The admin account already exists",
+    });
+  }
+
+  const passwordHash = await bcrypt.hash(password, 12);
+
+  try {
+    const createdUser = await User.create(
+      buildInitialAdminAccountPayload(passwordHash)
+    );
+
+    return res.status(201).json({
+      success: true,
+      message: "Initial admin account created",
+      email: createdUser.email,
+      role: createdUser.role,
+      status: createdUser.status,
+    });
+  } catch (error) {
+    if (error?.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "The admin account already exists",
+      });
+    }
+
+    throw error;
+  }
+};
+
 export const recoverAdminPassword = async (req, res) => {
   if (recoveryConsumed) {
     return res.status(410).json({
