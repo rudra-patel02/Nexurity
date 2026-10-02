@@ -12,14 +12,14 @@ services:
       - key: NEXT_PUBLIC_API_URL
         value: ""
       - key: NEXT_PUBLIC_SOCKET_URL
-        value: https://nexurity-backend.onrender.com
+        value: https://kavach-2-dzoj.onrender.com
       - key: API_URL
-        value: https://nexurity-backend.onrender.com
+        value: https://kavach-2-dzoj.onrender.com
       - key: NEXT_PUBLIC_VAPID_PUBLIC_KEY
         sync: false
 
   - type: web
-    name: nexurity-backend
+    name: kavach-2-dzoj
     runtime: node
     rootDir: backend
     plan: starter
@@ -48,7 +48,7 @@ services:
       - key: CORS_CREDENTIALS
         value: "true"
       - key: PUBLIC_API_BASE_URL
-        value: https://nexurity-backend.onrender.com
+        value: https://kavach-2-dzoj.onrender.com
       - key: MONGO_CONNECT_ATTEMPTS
         value: "5"
       - key: MONGO_CONNECT_RETRY_MS

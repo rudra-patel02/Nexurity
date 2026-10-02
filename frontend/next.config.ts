@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import { fileURLToPath } from "node:url";
 
 const frontendRoot = fileURLToPath(new URL(".", import.meta.url));
-const productionBackendOrigin = "https://nexurity-backend.onrender.com";
+const productionBackendOrigin = "https://kavach-2-dzoj.onrender.com";
 
 const trimTrailingSlash = (value: string) => value.trim().replace(/\/+$/, "");
 

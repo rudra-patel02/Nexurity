@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 
 const DEFAULT_BACKEND_ORIGIN =
   process.env.NODE_ENV === "production"
-    ? "https://nexurity-backend.onrender.com"
+    ? "https://kavach-2-dzoj.onrender.com"
     : "http://localhost:5000";
 
 const isLocalhostOrigin = (value: string) => {
@@ -107,6 +107,13 @@ const proxyRequest = async (
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error";
 
+    console.error("[api-proxy] backend_request_failed", {
+      method,
+      path: `/api/${path.join("/")}`,
+      backendOrigin: backendBaseUrl,
+      error: error instanceof Error ? error.name : "UnknownError",
+    });
+
     return Response.json(
       {
         message: "Backend API unavailable",
@@ -114,6 +121,15 @@ const proxyRequest = async (
       },
       { status: 502 }
     );
+  }
+
+  if (response.status >= 500) {
+    console.error("[api-proxy] backend_response_failed", {
+      method,
+      path: `/api/${path.join("/")}`,
+      backendOrigin: backendBaseUrl,
+      status: response.status,
+    });
   }
 
   return new Response(response.body, {

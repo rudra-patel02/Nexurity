@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 
 const DEFAULT_BACKEND_ORIGIN =
   process.env.NODE_ENV === "production"
-    ? "https://nexurity-backend.onrender.com"
+    ? "https://kavach-2-dzoj.onrender.com"
     : "http://localhost:5000";
 
 const isLocalhostOrigin = (value: string) => {

@@ -28,6 +28,26 @@ const enforceHttps = (value: string) => {
 const stripApiPrefix = (value: string) =>
   enforceHttps(value).replace(/\/api$/i, "");
 
+const getConfiguredHttpOrigin = (value: string) => {
+  const normalized = value.trim();
+
+  if (!normalized) {
+    return "";
+  }
+
+  try {
+    const url = new URL(normalized);
+
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+      return "";
+    }
+
+    return stripApiPrefix(normalized);
+  } catch {
+    return "";
+  }
+};
+
 const normalizePath = (path: string) => (path.startsWith("/") ? path : `/${path}`);
 
 const joinApiBaseAndPath = (baseUrl: string, path: string) => {
@@ -49,18 +69,16 @@ const joinApiBaseAndPath = (baseUrl: string, path: string) => {
 };
 
 export const getApiBaseUrl = () => {
-  const configuredUrl = process.env.NEXT_PUBLIC_API_URL?.trim() || "";
-
-  return stripApiPrefix(configuredUrl);
+  return getConfiguredHttpOrigin(process.env.NEXT_PUBLIC_API_URL || "");
 };
 
 export const getSocketBaseUrl = () => {
   const configuredUrl =
-    process.env.NEXT_PUBLIC_SOCKET_URL?.trim() ||
-    process.env.NEXT_PUBLIC_API_URL?.trim() ||
+    process.env.NEXT_PUBLIC_SOCKET_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
     "";
 
-  return stripApiPrefix(configuredUrl);
+  return getConfiguredHttpOrigin(configuredUrl);
 };
 
 export const apiUrl = (path: string) => {
@@ -161,6 +179,14 @@ export const apiFetch = async (
     } catch (error) {
       cleanup();
       lastError = error;
+
+      if (attempt === retryDelaysMs.length) {
+        console.error("[api] request_failed", {
+          method,
+          path,
+          error: error instanceof Error ? error.name : "UnknownError",
+        });
+      }
 
       if (attempt >= retryDelaysMs.length) {
         break;
