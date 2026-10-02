@@ -1,9 +1,18 @@
 import express from "express";
 
-import { recoverAdminPassword } from "../controllers/adminRecoveryController.js";
+import {
+  getAdminRecoveryStatus,
+  recoverAdminPassword,
+} from "../controllers/adminRecoveryController.js";
 import { rateLimit } from "../middleware/securityMiddleware.js";
 
 const router = express.Router();
+
+router.get(
+  "/status",
+  rateLimit({ max: 10, windowMs: 15 * 60 * 1000 }),
+  getAdminRecoveryStatus
+);
 
 router.post(
   "/",

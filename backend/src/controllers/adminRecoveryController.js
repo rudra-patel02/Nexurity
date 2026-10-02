@@ -1,9 +1,13 @@
 import crypto from "node:crypto";
 
 import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
 
 import User from "../models/user.js";
-import { ADMIN_EMAIL } from "../services/adminUserService.js";
+import {
+  ADMIN_EMAIL,
+  isBcryptHash,
+} from "../services/adminUserService.js";
 
 const ADMIN_ROLES = new Set(["Admin", "Super Admin"]);
 let recoveryConsumed = false;
@@ -19,6 +23,43 @@ const tokensMatch = (providedToken, configuredToken) => {
   );
 };
 
+const authorizeRecoveryRequest = (req, res) => {
+  const configuredToken = process.env.ADMIN_RECOVERY_TOKEN || "";
+  const providedToken = req.get("x-admin-recovery-token");
+
+  if (!tokensMatch(providedToken, configuredToken)) {
+    res.status(404).json({
+      success: false,
+      message: "Not found",
+    });
+    return false;
+  }
+
+  return true;
+};
+
+export const getAdminRecoveryStatus = async (req, res) => {
+  if (!authorizeRecoveryRequest(req, res)) {
+    return;
+  }
+
+  const user = await User.findOne({ email: ADMIN_EMAIL })
+    .select("+password email role status")
+    .lean();
+
+  return res.json({
+    success: true,
+    database: mongoose.connection.name || "",
+    admin: {
+      exists: Boolean(user),
+      email: user?.email || ADMIN_EMAIL,
+      role: user?.role || null,
+      status: user?.status || null,
+      passwordIsBcrypt: isBcryptHash(user?.password),
+    },
+  });
+};
+
 export const recoverAdminPassword = async (req, res) => {
   if (recoveryConsumed) {
     return res.status(410).json({
@@ -27,14 +68,8 @@ export const recoverAdminPassword = async (req, res) => {
     });
   }
 
-  const configuredToken = process.env.ADMIN_RECOVERY_TOKEN || "";
-  const providedToken = req.get("x-admin-recovery-token");
-
-  if (!tokensMatch(providedToken, configuredToken)) {
-    return res.status(404).json({
-      success: false,
-      message: "Not found",
-    });
+  if (!authorizeRecoveryRequest(req, res)) {
+    return;
   }
 
   const email = String(req.body?.email || "").trim().toLowerCase();
