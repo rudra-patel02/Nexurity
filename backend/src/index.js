@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import aiRoutes from "./routes/aiRoutes.js";
+import adminRecoveryRoutes from "./routes/adminRecoveryRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
 import auditRoutes from "./routes/auditRoutes.js";
 import backupRoutes from "./routes/backupRoutes.js";
@@ -174,6 +175,15 @@ const start = async () => {
   app.use(requestMetrics);
 
   app.use("/api/auth", authRoutes);
+  if (process.env.ADMIN_RECOVERY_ENABLED === "true") {
+    if ((process.env.ADMIN_RECOVERY_TOKEN || "").length < 32) {
+      throw new Error(
+        "ADMIN_RECOVERY_TOKEN must be at least 32 characters when admin recovery is enabled"
+      );
+    }
+
+    app.use("/api/internal/admin-recovery", adminRecoveryRoutes);
+  }
   app.use("/api/ai", aiRoutes);
   app.use("/api/analytics", analyticsRoutes);
   app.use("/api/audit", auditRoutes);
